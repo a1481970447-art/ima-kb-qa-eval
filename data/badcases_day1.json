@@ -1,0 +1,58 @@
+{
+  "meta": {
+    "day": "D1",
+    "date": "2026-08-25",
+    "kb_id": "eval-corpus-kb",
+    "kb_name": "评测语料库",
+    "corpus": "corpus/ D01-D20 (20 docs, all imported & parsed)",
+    "method": "ima MCP search_knowledge, 22 valid queries + import/API observations",
+    "attribution_taxonomy": ["retrieval", "generation", "data", "product_api"]
+  },
+  "badcases": [
+    {"id": "A-01", "type": "fact", "question": "ima 是什么时候上线的？", "actual": "TOP1=D08(用户帖) 高亮给出错误答案「ima是今年2月上线的」; 权威D02排第5、D03排第6", "expected": "2024年11月正式上线(D02·概述); Mac端2024-10-23、Windows端2024-11-15(D03·发展历程)", "gold_doc": ["D02", "D03"], "attribution": "data", "severity": "high", "note": "核心badcase: 数据层错误文档被优先引用"},
+    {"id": "A-02", "type": "fact", "question": "ima 上线时间(排序观察)", "actual": "权威源D02/D03排位(5,6)低于错误文档D08及不相关文档", "expected": "权威信源应排序高于众包用户帖", "gold_doc": ["D02", "D03"], "attribution": "retrieval", "severity": "high", "note": "排序无信源权威度/时效性信号"},
+    {"id": "A-03", "type": "fact", "question": "ima 新用户基础存储空间是多少GB？如何扩容？", "actual": "金标chunk(30GB)未召回; TOP1=D08不相关; D02召回但高亮无关chunk", "expected": "基础30GB, 双端+20GB, 邀请最高+50GB, 学生/老师认证100GB, 上限100GB(D02·第六节)", "gold_doc": ["D02"], "attribution": "retrieval", "severity": "high", "note": "长文档细节chunk级召回失败"},
+    {"id": "A-04", "type": "fact", "question": "copilot 新人福利发放多少算力？有效期多少天？", "actual": "正确chunk「a. 新人福利算力」排第2; TOP1=D03仅标题匹配无答案; D11跨域混淆第3", "expected": "一次性500算力, 31天内有效(D02·copilot算力机制)", "gold_doc": ["D02"], "attribution": "retrieval", "severity": "medium"},
+    {"id": "A-05", "type": "fact", "question": "ima 支持哪些使用平台和客户端？", "actual": "TOP2=D10高亮过期表述「客户端和微信小程序」(仅三种方式); D02完整平台清单chunk未召回", "expected": "网页版/Windows/Mac/iOS/Android/鸿蒙手机/鸿蒙电脑/微信小程序/浏览器插件(D02·第三节)", "gold_doc": ["D02"], "attribution": "data", "severity": "high", "note": "过期文档高位命中"},
+    {"id": "A-06", "type": "fact", "question": "支持平台(污染源观察)", "actual": "TOP1=库内既有文档「ima 知识库使用指南.pdf」(非评测语料), 多次占据首位", "expected": "评测应可圈定语料范围检索", "gold_doc": [], "attribution": "data", "severity": "medium", "note": "知识库无法隔离既有文档"},
+    {"id": "A-07", "type": "fact", "question": "邀请新用户注册最多可以获得多少存储空间奖励？", "actual": "金标chunk(最高50GB)未召回; TOP1=D08不相关; D13跨域噪声(「最多同时持有2个TokenPlan」)", "expected": "最高可再获得50GB(D02·第六节)", "gold_doc": ["D02"], "attribution": "retrieval", "severity": "medium"},
+    {"id": "A-08", "type": "fact", "question": "ima 知识库广场覆盖了多少行业？沉淀了多少份文件？", "actual": "金标chunk(20+行业/4亿+文件)未召回; TOP1=使用指南.pdf, TOP2=D10不相关", "expected": "20+行业, 4亿+份知识库文件(D01·公域知识探索)", "gold_doc": ["D01"], "attribution": "retrieval", "severity": "medium"},
+    {"id": "A-09", "type": "fact", "question": "ima 支持切换哪些大模型？", "actual": "高排均为旧信息(D08/D10: DeepSeek和混元); 含最新清单的D02排第7且未高亮", "expected": "DeepSeek V4-Flash/智谱GLM-5.1/Tencent Hy3 preview(D02·第五节)", "gold_doc": ["D02"], "attribution": "data", "severity": "high", "note": "过期模型清单被优先召回"},
+    {"id": "A-10", "type": "fact", "question": "Hunyuan-a13b 的输入输出价格是多少？", "actual": "正确chunk(输入0.5元输出2元)排第2; TOP1=D13不相关; 第3名D12高亮qwen3-max价格(2.5/10元)相邻", "expected": "输入0.5元/输出2元每百万tokens(D11·价格表, D12同口径互证)", "gold_doc": ["D11"], "attribution": "retrieval", "severity": "medium", "note": "多模型价格表相邻, 生成层易张冠李戴"},
+    {"id": "A-11", "type": "fact", "question": "Hy3 preview 模型的参数规模和上下文窗口是多少？", "actual": "TOP1=D12不相关chunk; D13排第2但参数chunk(295B/21B/256K)未高亮", "expected": "295B参数/21B激活MoE, 原生256K上下文, 最大输入192K/输出128K(D13·第一节)", "gold_doc": ["D13"], "attribution": "retrieval", "severity": "medium"},
+    {"id": "A-12", "type": "fact", "question": "copilot 功能是什么时候推出、什么时候全面开放的？", "actual": "TOP1=D03不相关; D02排第4仅高亮节标题, 时间chunk(2026-04-29/05-25)未召回", "expected": "2026-04-29推出, 2026-05-25全面开放, 灰度期超10万人排队(D02·第七节; D03互证)", "gold_doc": ["D02"], "attribution": "retrieval", "severity": "medium"},
+    {"id": "A-13", "type": "multi_doc", "question": "两个百科词条对 ima 上线时间的记载有什么差异？", "actual": "文档级双召回(D02第1/D03第2)但高亮chunk均与时间线无关, 无法支撑差异对比作答", "expected": "D02: 2024年11月整体上线 vs D03: 2024-10-23 Mac端/2024-11-15 Windows端分端上线", "gold_doc": ["D02", "D03"], "attribution": "retrieval", "severity": "high", "note": "多文档题需两篇时间线chunk同时进上下文, 实际均未召回"},
+    {"id": "A-14", "type": "multi_doc", "question": "混元 API 的价格官方文档和第三方对比文章口径一致吗？哪篇提到调价？", "actual": "文档级双召回(D11第1/D12第2), 但高亮命中front-matter的quality_note元数据而非正文价格表", "expected": "口径不完全一致: D11官方刊例价 vs D12第三方(截至2026-04)含2026年3-4月两轮调价/HY2.0 Instruct输入涨幅463%", "gold_doc": ["D11", "D12"], "attribution": "data", "severity": "high", "note": "语料front-matter元数据被索引成答案"},
+    {"id": "A-15", "type": "refusal", "question": "ima 内部检索用的具体切块参数是多少？(库外)", "actual": "返回18条相似文档无拒答信号; D19高亮「|Chunk Size|」(论文实验参数)与问题表面高度相关", "expected": "应拒答: 库内无ima内部切块参数", "gold_doc": [], "attribution": "retrieval", "severity": "high", "note": "检索层无库外判断, 生成层拒答零支持"},
+    {"id": "A-16", "type": "refusal", "question": "元宝的日活数据是多少？(库外)", "actual": "返回不相关文档, 无拒答信号", "expected": "应拒答: 库内无元宝日活数据", "gold_doc": [], "attribution": "retrieval", "severity": "high"},
+    {"id": "A-17", "type": "refusal", "question": "ima 的月活跃用户数是多少？(库外)", "actual": "TOP1=D08高亮又是「ima是今年2月上线的」—库外问题把错误文档顶到首位", "expected": "应拒答: 库内无MAU数据", "gold_doc": [], "attribution": "retrieval", "severity": "high", "note": "与A-01复合"},
+    {"id": "A-18", "type": "reasoning", "question": "RAGAS 提出了哪些无需参考答案的评测指标？", "actual": "D14文档级TOP1但高亮仅标题; 指标chunk(faithfulness等)未召回", "expected": "Faithfulness/Answer Relevance/Context Recall/Precision等无参考指标(D14)", "gold_doc": ["D14"], "attribution": "retrieval", "severity": "medium", "note": "中文问题→英文PDF正文跨语言chunk级失败"},
+    {"id": "A-19", "type": "reasoning", "question": "胜不凡的五步读书法是哪五步？", "actual": "D09文档级TOP1(靠作者名匹配), 五步内容chunk未呈现", "expected": "拆解/溯源/追问/出题/导图(D09·正文)", "gold_doc": ["D09"], "attribution": "retrieval", "severity": "medium"},
+    {"id": "A-20", "type": "fact", "question": "存储空间问题的跨域噪声观察", "actual": "D18(ARES论文)高亮「32 GB of memory」进入前排—字面撞车(GB/内存)语义无关", "expected": "30GB(D02)", "gold_doc": ["D02"], "attribution": "retrieval", "severity": "low"},
+    {"id": "A-21", "type": "fact", "question": "a13b价格的生成层风险单列", "actual": "正确chunk与qwen3-max价格chunk(2.5/10元)同时进前3", "expected": "0.5元输入/2元输出(D11)", "gold_doc": ["D11"], "attribution": "generation", "severity": "medium", "note": "需D4 judge验证数字张冠李戴率"},
+    {"id": "A-22", "type": "fact", "question": "2.1.1版本更新功能(同题多源观察)", "actual": "D07命中正常, 但D06排位靠后且两文措辞差异(50人协作vs新增协作成员)无一致性提示", "expected": "五项更新清单(D06/D07)", "gold_doc": ["D06", "D07"], "attribution": "retrieval", "severity": "low"},
+    {"id": "A-23", "type": "fact", "question": "旧版本功能描述作为现状答案的风险", "actual": "D05(1.9.3旧版评测)在多轮检索中稳定进入前列, 无版本过期标记", "expected": "当前为2.5.x版本(D02·概述)", "gold_doc": ["D02"], "attribution": "data", "severity": "medium"},
+    {"id": "A-24", "type": "behavior", "question": "检索结果可控性", "actual": "不同问题返回2~18条不定; 无相关性分数; 无top-k参数; cursor存在但is_end恒true", "expected": "固定top-k+返回分数, 支撑MRR/nDCG等指标", "gold_doc": [], "attribution": "product_api", "severity": "medium"},
+    {"id": "B-01", "type": "product", "question": "批量导入20篇文档", "actual": "单文件三步链路(create_media→COS PUT→add_knowledge), 20文件60次调用; 凭证手工中转, 首批5/19凭证失效", "expected": "批量导入API或文件夹级导入", "gold_doc": [], "attribution": "product_api", "severity": "medium"},
+    {"id": "B-02", "type": "product", "question": "导入后立即提问", "actual": "解析约4分钟, 期间检索可用但内容缺失, 产生假badcase; 无解析完成通知", "expected": "解析状态可查询+完成回调, 或问答中提示未解析完成", "gold_doc": [], "attribution": "product_api", "severity": "high", "note": "状态不透明→用户误判知识库能力"},
+    {"id": "B-03", "type": "product", "question": "自动化评测知识库问答质量", "actual": "MCP仅检索接口无问答API, 生成层质量只能人工客户端复现", "expected": "提供含引用来源的QA API", "gold_doc": [], "attribution": "product_api", "severity": "high", "note": "D3自建pipeline的直接动因"},
+    {"id": "B-04", "type": "product", "question": "定量评估检索排序", "actual": "结果不带相似度分数, 无法计算MRR/nDCG", "expected": "返回分数或稳定排序依据", "gold_doc": [], "attribution": "product_api", "severity": "medium"},
+    {"id": "B-05", "type": "product", "question": "纯净评测语料", "actual": "既有文档(使用指南.pdf)持续混入结果多次占TOP1, 无法按文件夹/标签限定检索范围", "expected": "支持按文件夹/标签圈定检索范围", "gold_doc": [], "attribution": "data", "severity": "medium"},
+    {"id": "B-06", "type": "product", "question": "定位答案出处", "actual": "高亮多为文档introduction或节标题而非含答案chunk", "expected": "高亮指向命中正文片段", "gold_doc": [], "attribution": "retrieval", "severity": "medium"},
+    {"id": "B-07", "type": "product", "question": "英文论文解析质量", "actual": "D17高亮乱码「Answetwdent.ccefict日」; D20高亮混入prompt模板文本", "expected": "解析保证文本完整性, 剔除模板/页眉噪声", "gold_doc": ["D17", "D20"], "attribution": "data", "severity": "medium"},
+    {"id": "B-08", "type": "product", "question": "库内事实冲突(D08 vs D02上线时间)", "actual": "界面/API均无冲突提示, 用户提问时被动抽签决定看到哪个答案", "expected": "知识库健康度: 冲突/过期/错误文档检测与提示", "gold_doc": ["D02", "D08"], "attribution": "data", "severity": "high", "note": "D7提案核心功能的实证"}
+  ],
+  "controls": [
+    {"id": "C-1", "question": "每日登录可以领取多少算力？", "result": "D02 TOP1正确chunk(100算力/当日有效)"},
+    {"id": "C-2", "question": "ima 2.1.1 版本更新了哪些新功能？", "result": "D07命中"},
+    {"id": "C-3", "question": "Hy Token Plan 有哪几个套餐档位？", "result": "D13 TOP1(doc级)"},
+    {"id": "C-4", "question": "调用Hunyuan-role-latest 200万tokens需要多少费用？", "result": "D11 TOP1命中计算示例chunk(3.84元)"},
+    {"id": "C-5", "question": "LLM-as-judge模型裁判存在哪些偏差？", "result": "D15 TOP1高亮Verbosity bias"}
+  ],
+  "stats": {
+    "valid_queries": 22,
+    "queries_with_issues": 17,
+    "total_badcase_entries": 32,
+    "attribution_counts": {"retrieval": 15, "data": 9, "generation": 4, "product_api": 4}
+  }
+}

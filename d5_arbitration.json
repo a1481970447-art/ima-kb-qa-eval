@@ -1,0 +1,51 @@
+{
+  "_meta": {
+    "day": "D5",
+    "date": "2026-08-29",
+    "说明": "人工复核仲裁结论。review 依据：逐条比对 question / gold_answer / answer / retrieved chunk 明细。9 条错误样本全部复核，4 条裁判分歧样本全部仲裁；未列出的错误样本维持自动归因。",
+    "judge_disagreement_arbitration": {
+      "F-15.factuality": "partial/correct/correct → 采信 correct。答案数字来自 D11 价格表，个别有效期口径与金标叙述有出入，记弱问题",
+      "R-02.factuality": "correct/partial/partial → 采信 partial。三类偏差列举正确，金标含第四点（判断力局限）未覆盖，弱问题",
+      "R-02.completeness": "complete/complete/partial → 采信 complete。要点覆盖可接受",
+      "R-12.factuality": "incorrect/partial/partial → 采信 partial。权限描述部分正确（协作成员边界），无关键性张冠李戴",
+      "R-13.faithfulness": "partial/supported/supported → 采信 supported。论断均有 D09 出处",
+      "结论": "5 处裁判分歧 majority 全部被采信，无一例翻转——3 次取多数机制有效性得到验证；分歧率 5/约130 指标实例 ≈ 4%"
+    }
+  },
+  "F-07": {
+    "final_layer": "retrieval",
+    "note": "改判（generation→retrieval）：自动树按『错误拒答+金标 hit_top3』判生成层，但复核发现 rank=2 是文档级弱证据——D02 命中的是『核心功能』章节 chunk，金标『模型切换菜单+各模型适用场景』章节实际未召回。模型『无据可答而拒答』是诚实行为，根因是章节级检索失败。教训：文档级命中率会高估检索质量，D6 看板应补章节级口径。"
+  },
+  "F-16": {
+    "final_layer": "retrieval",
+    "note": "维持：长文档细节埋深（rank=4 弱命中），『仅支持微信扫码』金标 chunk 未召回导致错误拒答，诚实行为"
+  },
+  "F-17": {
+    "final_layer": "retrieval",
+    "note": "维持：D03 时间线 chunk 未召回（rank=None），模型无据可答而拒答"
+  },
+  "M-01": {
+    "final_layer": "generation",
+    "note": "维持（附 PM 洞察）：D02 与 D03 时间线信息均在上下文中（答案自己引用了 D03#003 分端时间），模型却以『均未提及腾讯云百科或搜狗百科词条』拒答——未建立『文档↔百科词条』映射。深层原因：D3 的 front-matter 物理隔离把词条出处（信源身份）一并剥离，元数据防污染与信源身份可追溯是一对真实的产品矛盾，值得写进提案"
+  },
+  "M-03": {
+    "final_layer": "retrieval",
+    "note": "维持：两篇时间线 chunk 均未进高位（rank=6 弱命中），部分召回失败"
+  },
+  "M-04": {
+    "final_layer": "data",
+    "note": "改判（retrieval→data，复合错误）：D10 过期表述『三种使用方式』TOP1 高位命中且被模型采信为权威答案（数据层埋点在复现架构中真实触发）；D02 权威平台清单 chunk 未召回是次因（剥夺纠错机会）；金标要求『按信源权威度取舍』而模型无此指令是第三因。主因判数据层：库中存在过期脏数据且排序权重高于权威源"
+  },
+  "R-01": {
+    "final_layer": "generation",
+    "note": "维持：D14 正确章节召回（rank=3），跨语言 chunk 检索实际成功（与 D1 在 ima 实测的『仅高亮标题』不同——复现架构 embedding 跨语言能力更强，此差异需在报告声明）；答案对 reference-free 指标列举不完整（漏 Faithfulness 核心指标）属生成层归纳不足"
+  },
+  "R-04": {
+    "final_layer": "generation",
+    "note": "维持：D16 相关 chunk 已在上下文，模型仅提取 FP1 后以『其余六个未在片段中给出』拒答——LLM 未正确提取上下文信息，正是 Seven Failure Points 论文定义的 FP4 Not Extracted 的原样复现（用被测论文自己的失败点框架诊断出同款失败点，报告彩蛋）"
+  },
+  "R-13": {
+    "final_layer": "generation",
+    "note": "维持：D09 观点 chunk 召回且答案有据（faithfulness=supported），但观点归纳偏离金标核心（『答案准确性与真实性』→『资料上传与深度提问』），生成层综合失败"
+  }
+}

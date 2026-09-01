@@ -1,0 +1,5417 @@
+{
+  "meta": {
+    "day": "D5",
+    "date": "2026-08-29",
+    "pipeline": "rag_pipeline.py（D3）",
+    "scoring": "scoring.py（D4）",
+    "judge_runs": 3,
+    "top_k": 8,
+    "arbitration": "人工复核仲裁见 d5_arbitration.json 与 D5_跑批与归因说明.md",
+    "attribution_tree": "retrieval / generation / data（见 D5_跑批与归因说明.md）"
+  },
+  "stats": {
+    "n": 50,
+    "n_correct": 41,
+    "n_error": 9,
+    "error_rate": 0.18,
+    "attribution_counts": {
+      "retrieval": 4,
+      "generation": 4,
+      "data": 1
+    },
+    "attribution_pct_of_errors": {
+      "retrieval": 0.444,
+      "generation": 0.444,
+      "data": 0.111
+    },
+    "attribution_coverage": "9/9",
+    "by_type": {
+      "fact": {
+        "n": 20,
+        "correct": 17,
+        "error_rate": 0.15,
+        "judge_avg": 1.62
+      },
+      "reasoning": {
+        "n": 15,
+        "correct": 12,
+        "error_rate": 0.2,
+        "judge_avg": 1.43
+      },
+      "refusal": {
+        "n": 10,
+        "correct": 10,
+        "error_rate": 0.0,
+        "judge_avg": null
+      },
+      "multi_doc": {
+        "n": 5,
+        "correct": 2,
+        "error_rate": 0.6,
+        "judge_avg": 0.7
+      }
+    },
+    "metrics": {
+      "retrieval_hit_top3_rate": 0.875,
+      "refusal_accuracy_rate": 1.0,
+      "factuality_correct_rate": 0.676,
+      "factuality_partial_rate": 0.147,
+      "faithfulness_supported_rate": 1.0,
+      "completeness_complete_rate": 0.412
+    },
+    "judge_disagreement_items": 4,
+    "latency_total_s_mean": 14.87
+  },
+  "results": [
+    {
+      "id": "F-01",
+      "type": "fact",
+      "subtype": "data_conflict",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 2,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 3.24,
+        "latency_generate_s": 16.25,
+        "latency_total_s": 19.49
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "正确给出ima于2024年11月上线，与金标关键事实一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "上线时间2024年11月与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "回答指出2024年11月上线，与金标关键事实一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D02】ima（information management assistant，对外产品名ima/ima.copilot）是腾讯推出的AI工作台产品，定位为\"会思考的知识库\"，于2024年11月正式上线（见 D02#001、D02#000）。",
+        "retrieved": [
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.6544
+          },
+          {
+            "chunk_id": "D03#003",
+            "doc_id": "D03",
+            "section": "ima.copilot·发展历程",
+            "score": 0.6502
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.643
+          },
+          {
+            "chunk_id": "D02#000",
+            "doc_id": "D02",
+            "section": "摘要(开头)",
+            "score": 0.632
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.6081
+          },
+          {
+            "chunk_id": "D02#006",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·4. 商业化状态",
+            "score": 0.5944
+          },
+          {
+            "chunk_id": "D08#000",
+            "doc_id": "D08",
+            "section": "摘要(开头)",
+            "score": 0.5887
+          },
+          {
+            "chunk_id": "D02#010",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·4. AI辅助创作与设计",
+            "score": 0.5799
+          }
+        ],
+        "latency_total_s": 19.49
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-02",
+      "type": "fact",
+      "subtype": "deep_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.12,
+        "latency_generate_s": 7.95,
+        "latency_total_s": 9.06
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "基础30GB、扩容方式及上限均与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "基础30GB、扩容与上限100GB均正确对应金标",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "基础30GB、扩容方式与上限均与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "complete",
+              "reason": "覆盖基础空间、扩容方式及上限，仅缺广场不占空间细节",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "覆盖基础扩容上限，仅缺广场不占空间的次要细节",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "基本覆盖要点，仅缺广场不占空间次要说明",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "complete",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D02】  \n- **基础存储空间**：新用户基础存储空间为 30 GB（仅下载单端使用时）。  \n- **扩容方式**：  \n  - 双端下载奖励：同时下载手机+电脑双端，额外赠送 20 GB 存储空间；  \n  - 邀请新用户：通过邀请新用户注册 ima，最高可再获得 50 GB 存储空间奖励；  \n  - 学生认证：在校大学生完成学生认证可一键直达 100 GB 存储空间；  \n  - 老师认证：在校老师完成老师认证之后，也可直达 100 GB 存储空间；  \n  - 活动获取扩容 CDkey：ima 和其他产品的联合活动，符合条件可以获得 CDkey，通过 CDkey 可直达 100 GB 存储空间。  \n- **存储空间上限**：通过上述方式，用户最高可获得 100 GB 的免费存储空间。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#015",
+            "doc_id": "D02",
+            "section": "ima·六、ima 的免费存储空间有多少？如何扩容？",
+            "score": 0.694
+          },
+          {
+            "chunk_id": "D10#002",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第二步：认识界面布局",
+            "score": 0.5079
+          },
+          {
+            "chunk_id": "D02#003",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·2. copilot 算力机制",
+            "score": 0.4992
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.4937
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.4901
+          },
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.4873
+          },
+          {
+            "chunk_id": "D02#002",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·1. 基础功能免费",
+            "score": 0.4835
+          },
+          {
+            "chunk_id": "D08#000",
+            "doc_id": "D08",
+            "section": "摘要(开头)",
+            "score": 0.4804
+          }
+        ],
+        "latency_total_s": 9.06
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-03",
+      "type": "fact",
+      "subtype": "deep_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 2.52,
+        "latency_generate_s": 5.51,
+        "latency_total_s": 8.03
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "发放500算力31天有效，事实与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "关键事实数字与期限均与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "算力500、有效期31天等关键事实与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D02】根据资料，针对首次获得 copilot 功能体验资格的“新人”用户，ima 在用户获得体验资格后一次性发放 **500 算力**；该算力自发放之日起 **31 天内有效**（至到期当日 23:59:59）。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#003",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·2. copilot 算力机制",
+            "score": 0.7109
+          },
+          {
+            "chunk_id": "D02#004",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·2. copilot 算力机制",
+            "score": 0.7063
+          },
+          {
+            "chunk_id": "D01#003",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·专属知识伙伴copilot越用越懂你",
+            "score": 0.6295
+          },
+          {
+            "chunk_id": "D02#017",
+            "doc_id": "D02",
+            "section": "ima·七、ima 的知识 Agent「copilot」功能是什么？·2. copilot核心能力",
+            "score": 0.5866
+          },
+          {
+            "chunk_id": "D07#001",
+            "doc_id": "D07",
+            "section": "IMA 新功能：50人协作 + 21语翻译，效率直接拉满",
+            "score": 0.5569
+          },
+          {
+            "chunk_id": "D02#016",
+            "doc_id": "D02",
+            "section": "ima·七、ima 的知识 Agent「copilot」功能是什么？·1. 功能定义与开放时间",
+            "score": 0.5531
+          },
+          {
+            "chunk_id": "D06#001",
+            "doc_id": "D06",
+            "section": "IMA 藏不住了！4个新功能曝光，实测超好用",
+            "score": 0.5495
+          },
+          {
+            "chunk_id": "D11#004",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·免费额度",
+            "score": 0.5231
+          }
+        ],
+        "latency_total_s": 8.03
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-04",
+      "type": "fact",
+      "subtype": "deep_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.12,
+        "latency_generate_s": 6.38,
+        "latency_total_s": 7.5
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "待评回答与金标关键事实完全一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "与金标一致，50GB存储空间奖励正确",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "与金标一致，最高50GB存储空间奖励",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D02】通过邀请新用户注册 ima，最高可再获得 50 GB 存储空间奖励。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#015",
+            "doc_id": "D02",
+            "section": "ima·六、ima 的免费存储空间有多少？如何扩容？",
+            "score": 0.7624
+          },
+          {
+            "chunk_id": "D02#003",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·2. copilot 算力机制",
+            "score": 0.6396
+          },
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.6394
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.6173
+          },
+          {
+            "chunk_id": "D02#005",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·3. 知识库付费加入",
+            "score": 0.613
+          },
+          {
+            "chunk_id": "D02#006",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·4. 商业化状态",
+            "score": 0.6102
+          },
+          {
+            "chunk_id": "D02#002",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·1. 基础功能免费",
+            "score": 0.6014
+          },
+          {
+            "chunk_id": "D10#002",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第二步：认识界面布局",
+            "score": 0.5853
+          }
+        ],
+        "latency_total_s": 7.5
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-05",
+      "type": "fact",
+      "subtype": "outdated_info",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 3,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.2,
+        "latency_generate_s": 19.15,
+        "latency_total_s": 20.35
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "遗漏鸿蒙及浏览器插件，但所列平台事实无错误",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "遗漏鸿蒙手机、鸿蒙电脑、浏览器插件，但所列事实无错误",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "未提及鸿蒙及浏览器插件，但无事实错误",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "覆盖Windows等6项，遗漏鸿蒙手机、电脑及浏览器插件。",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "遗漏鸿蒙手机、鸿蒙电脑及浏览器插件",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "覆盖网页等6项，遗漏鸿蒙手机、鸿蒙电脑及浏览器插件",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 1,
+      "record": {
+        "answer": "【依据 D03】根据参考资料中《ima.copilot·基本信息》（D03#002）的记载，ima.copilot（即ima）的软件平台包括：电脑端（Windows、Mac）、移动端（安卓、iOS）、微信小程序。\n\n结合其他资料进一步补充：\n- D10#001、D03#003 印证了 Windows 客户端、Mac 客户端以及微信小程序的存在，且各端上线历程清晰（Mac端2024年10月、Windows端2024年11月、安卓版2025年2月、iOS版2025年3月、小程序2024年12月等）；\n- D08#002 指出 ima 支持“手机/电脑/iPad随时记录，app/小程序/网页无缝衔接”，明确了除客户端和小程序外，还提供网页端，且 iPad 可通过 iOS 端或网页使用。\n\n综合可知，ima 目前支持的使用平台和客户端有：**Windows 客户端、Mac 客户端、安卓 App、iOS App（含 iPad）、微信小程序以及网页端**。",
+        "retrieved": [
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.6168
+          },
+          {
+            "chunk_id": "D03#002",
+            "doc_id": "D03",
+            "section": "ima.copilot·基本信息",
+            "score": 0.5784
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.5683
+          },
+          {
+            "chunk_id": "D02#008",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·2. 多模态内容深度解读",
+            "score": 0.5683
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.5664
+          },
+          {
+            "chunk_id": "D03#003",
+            "doc_id": "D03",
+            "section": "ima.copilot·发展历程",
+            "score": 0.5618
+          },
+          {
+            "chunk_id": "D10#000",
+            "doc_id": "D10",
+            "section": "摘要(开头)",
+            "score": 0.561
+          },
+          {
+            "chunk_id": "D02#006",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·4. 商业化状态",
+            "score": 0.5591
+          }
+        ],
+        "latency_total_s": 20.35
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": true
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-06",
+      "type": "fact",
+      "subtype": "deep_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.03,
+        "latency_generate_s": 8.44,
+        "latency_total_s": 9.47
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "与金标一致，覆盖20+行业，沉淀4亿+份文件",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "行业数与文件数与金标一致，无关键错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "行业与文件数均与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D01】ima 知识库广场已覆盖科技、金融、教育、医疗、法律、政务等 20+ 行业，累积沉淀 4亿+ 份知识库文件。",
+        "retrieved": [
+          {
+            "chunk_id": "D01#009",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·公域知识探索：让知识流动起来",
+            "score": 0.7658
+          },
+          {
+            "chunk_id": "D01#001",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·知识碎片，轻松整理入库",
+            "score": 0.67
+          },
+          {
+            "chunk_id": "D01#008",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·私域知识共享：我们的共享大脑·共享知识库可以这样用",
+            "score": 0.6469
+          },
+          {
+            "chunk_id": "D10#003",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第三步：创建个人知识库",
+            "score": 0.6282
+          },
+          {
+            "chunk_id": "D03#004",
+            "doc_id": "D03",
+            "section": "ima.copilot·主要功能",
+            "score": 0.6074
+          },
+          {
+            "chunk_id": "D02#009",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·3. 个性化知识管理与沉淀",
+            "score": 0.5995
+          },
+          {
+            "chunk_id": "D01#000",
+            "doc_id": "D01",
+            "section": "摘要(开头)",
+            "score": 0.5863
+          },
+          {
+            "chunk_id": "D01#006",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·私域知识共享：我们的共享大脑",
+            "score": 0.5828
+          }
+        ],
+        "latency_total_s": 9.47
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-07",
+      "type": "fact",
+      "subtype": "outdated_info",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 2,
+        "refusal_expected": false,
+        "refusal_detected": true,
+        "refusal_accuracy": false,
+        "latency_retrieve_s": 1.21,
+        "latency_generate_s": 28.34,
+        "latency_total_s": 29.54
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "incorrect",
+              "reason": "待评模型与金标矛盾且否认真实场景",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "待评模型与场景均与金标矛盾，属关键事实错误",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "模型名称不符金标且称无场景说明，关键事实错误",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "incorrect",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 0,
+      "record": {
+        "answer": "【依据 D03】知识库中没有找到与该问题相关的可靠内容。库里实际有：D03#002 记载 ima.copilot 支持腾讯混元、DeepSeek-r1、DeepSeek-V3 大模型，D03#003 提及 DeepSeek R1-0528 为深度思考模型，但缺乏这些模型分别适合什么场景的详细说明。",
+        "retrieved": [
+          {
+            "chunk_id": "D01#005",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·你可以这样用ima",
+            "score": 0.6109
+          },
+          {
+            "chunk_id": "D02#008",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·2. 多模态内容深度解读",
+            "score": 0.6085
+          },
+          {
+            "chunk_id": "D12#013",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·十二、行业趋势与选型策略·选型策略",
+            "score": 0.6041
+          },
+          {
+            "chunk_id": "D03#003",
+            "doc_id": "D03",
+            "section": "ima.copilot·发展历程",
+            "score": 0.5994
+          },
+          {
+            "chunk_id": "D02#010",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·4. AI辅助创作与设计",
+            "score": 0.5992
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.5968
+          },
+          {
+            "chunk_id": "D03#002",
+            "doc_id": "D03",
+            "section": "ima.copilot·基本信息",
+            "score": 0.5947
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.5902
+          }
+        ],
+        "latency_total_s": 29.54
+      },
+      "attribution": {
+        "layer": "generation",
+        "reason": "金标已入 top-3 仍错误拒答",
+        "errors": [
+          "错误拒答",
+          "事实错误"
+        ],
+        "needs_review": false
+      },
+      "attribution_final": "retrieval"
+    },
+    {
+      "id": "F-08",
+      "type": "fact",
+      "subtype": "deep_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.16,
+        "latency_generate_s": 6.01,
+        "latency_total_s": 7.17
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "日期与开放状态均与金标一致，无关键事实错误。",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "日期与金标一致，无关键事实错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "日期与开放状态均与金标一致，无关键错误",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D02】ima 的知识 Agent「copilot」功能于 2026 年 4 月 29 日推出，并于 2026 年 5 月 25 日全面开放（所有用户打开 ima 均可直接使用，不再需要邀请申请）。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#016",
+            "doc_id": "D02",
+            "section": "ima·七、ima 的知识 Agent「copilot」功能是什么？·1. 功能定义与开放时间",
+            "score": 0.8569
+          },
+          {
+            "chunk_id": "D02#017",
+            "doc_id": "D02",
+            "section": "ima·七、ima 的知识 Agent「copilot」功能是什么？·2. copilot核心能力",
+            "score": 0.8131
+          },
+          {
+            "chunk_id": "D01#003",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·专属知识伙伴copilot越用越懂你",
+            "score": 0.7338
+          },
+          {
+            "chunk_id": "D03#003",
+            "doc_id": "D03",
+            "section": "ima.copilot·发展历程",
+            "score": 0.7262
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.7245
+          },
+          {
+            "chunk_id": "D03#000",
+            "doc_id": "D03",
+            "section": "摘要(开头)",
+            "score": 0.721
+          },
+          {
+            "chunk_id": "D02#000",
+            "doc_id": "D02",
+            "section": "摘要(开头)",
+            "score": 0.7095
+          },
+          {
+            "chunk_id": "D03#004",
+            "doc_id": "D03",
+            "section": "ima.copilot·主要功能",
+            "score": 0.7058
+          }
+        ],
+        "latency_total_s": 7.17
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-09",
+      "type": "fact",
+      "subtype": "positive_control",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.0,
+        "latency_generate_s": 9.62,
+        "latency_total_s": 10.62
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "准确复述金标100算力与当日有效，无关键错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "关键事实100算力与当日有效与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "100算力与当日有效事实均与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D02】根据资料中的“每日登录算力”规则，用户每日登录 ima.copilot 客户端（PC 端或移动端）可领取 **100 算力**，每次领取的算力**限当日内有效（至当日 23:59:59）**。资料同时说明 ima 会根据实际运营情况调整每日登录可领取的算力数量，且该功能活动时间为 2026 年 4 月 28 日 00:00 起至 2026 年 6 月 30 日 23:59:59 止（依据 D02#003）。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#003",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·2. copilot 算力机制",
+            "score": 0.8018
+          },
+          {
+            "chunk_id": "D02#006",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·4. 商业化状态",
+            "score": 0.7367
+          },
+          {
+            "chunk_id": "D02#005",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·3. 知识库付费加入",
+            "score": 0.7137
+          },
+          {
+            "chunk_id": "D02#004",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·2. copilot 算力机制",
+            "score": 0.706
+          },
+          {
+            "chunk_id": "D02#002",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·1. 基础功能免费",
+            "score": 0.6972
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.668
+          },
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.6634
+          },
+          {
+            "chunk_id": "D02#007",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·1. 信息获取与智能问答",
+            "score": 0.6569
+          }
+        ],
+        "latency_total_s": 10.62
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-10",
+      "type": "fact",
+      "subtype": "cross_domain_confusion",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": false,
+        "retrieval_rank": 6,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.0,
+        "latency_generate_s": 10.46,
+        "latency_total_s": 11.45
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "输入输出价格与名称均同金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "输入0.5输出2元每百万tokens，与金标一致。",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "输入0.5输出2元每百万tokens，与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D12#004】腾讯混元 Hunyuan-a13b 模型的输入价格为 **0.5 元/百万 Tokens**，输出价格为 **2 元/百万 Tokens**（见 API 按量定价表，备注“入门之选”）。资料 D11#005 的 token 后付费刊例价同样标明：Hunyuan-a13b 输入 0.5 元、输出 2 元（每百万 tokens）。",
+        "retrieved": [
+          {
+            "chunk_id": "D12#007",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·免费额度",
+            "score": 0.7975
+          },
+          {
+            "chunk_id": "D12#002",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·厂商背景",
+            "score": 0.7671
+          },
+          {
+            "chunk_id": "D12#006",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·预付费资源包",
+            "score": 0.7644
+          },
+          {
+            "chunk_id": "D12#005",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·API 按量定价（元/百万 Tokens）",
+            "score": 0.756
+          },
+          {
+            "chunk_id": "D12#004",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·API 按量定价（元/百万 Tokens）",
+            "score": 0.7552
+          },
+          {
+            "chunk_id": "D11#005",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·混元生文价格说明·token 后付费",
+            "score": 0.7417
+          },
+          {
+            "chunk_id": "D12#003",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·模型矩阵",
+            "score": 0.7286
+          },
+          {
+            "chunk_id": "D11#000",
+            "doc_id": "D11",
+            "section": "摘要(开头)",
+            "score": 0.7267
+          }
+        ],
+        "latency_total_s": 11.45
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-11",
+      "type": "fact",
+      "subtype": "deep_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.02,
+        "latency_generate_s": 9.69,
+        "latency_total_s": 10.7
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "参数、激活、上下文及输入输出均与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "关键事实与金标完全一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "参数与上下文事实与金标完全一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D13#002】Hy3 preview 模型的参数规模为 295B 参数、21B 激活的 MoE 架构；在上下文窗口方面，它原生支持 256K 上下文，最大输入为 192K、最大输出为 128K。（参考资料 D13#000 与 D13#006 也提及了原生 256K 上下文及 192K 最大输入等相关信息）",
+        "retrieved": [
+          {
+            "chunk_id": "D13#009",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.4 高频 Function Calling 与结构化输出",
+            "score": 0.6885
+          },
+          {
+            "chunk_id": "D13#007",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.2 Agent 工作负载与多轮深度推理",
+            "score": 0.6841
+          },
+          {
+            "chunk_id": "D13#006",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.1 长文档处理与代码库理解",
+            "score": 0.6825
+          },
+          {
+            "chunk_id": "D13#012",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·五、用前先 0 元试一遍：新人免费体验包",
+            "score": 0.679
+          },
+          {
+            "chunk_id": "D13#002",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·一、Hy Token Plan 是什么：一个套餐直通最新混元",
+            "score": 0.6747
+          },
+          {
+            "chunk_id": "D13#013",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·六、和通用 Token Plan 怎么搭配",
+            "score": 0.6707
+          },
+          {
+            "chunk_id": "D13#000",
+            "doc_id": "D13",
+            "section": "摘要(开头)",
+            "score": 0.6522
+          },
+          {
+            "chunk_id": "D13#008",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.3 在 IDE 中重度使用 AI 编程工具",
+            "score": 0.652
+          }
+        ],
+        "latency_total_s": 10.7
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-12",
+      "type": "fact",
+      "subtype": "positive_control",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.13,
+        "latency_generate_s": 6.81,
+        "latency_total_s": 7.95
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "档位名称价格及模型覆盖均与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "档位名称与价格均与金标一致，覆盖模型相同",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "档位名称与价格均与金标一致，无关键错误",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "遗漏各档位Tokens数量，档位价格模型已覆盖",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "遗漏各档位Tokens额度，但覆盖档位、价格及模型",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "遗漏各档位Tokens数量要点",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 1.5,
+      "record": {
+        "answer": "【依据 D13#003】Hy Token Plan 目前提供 4 个套餐档位，对应的价格分别为：\n- 体验套餐（Lite）：28 元/月\n- 基础套餐（Standard）：78 元/月\n- 进阶套餐（Pro）：238 元/月\n- 专业套餐（Max）：468 元/月\n\n（以上档位均覆盖混元 Hy3 preview 模型，详见资料中 4 档套餐档位与定价全景表格。）",
+        "retrieved": [
+          {
+            "chunk_id": "D13#003",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·二、4 档套餐档位与定价全景",
+            "score": 0.8027
+          },
+          {
+            "chunk_id": "D13#014",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·七、写在最后",
+            "score": 0.7981
+          },
+          {
+            "chunk_id": "D13#011",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·四、开通与使用：从下单到首次调用·4.2 几条必须知道的规则",
+            "score": 0.7943
+          },
+          {
+            "chunk_id": "D13#001",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析",
+            "score": 0.7854
+          },
+          {
+            "chunk_id": "D13#002",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·一、Hy Token Plan 是什么：一个套餐直通最新混元",
+            "score": 0.7745
+          },
+          {
+            "chunk_id": "D13#004",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·二、4 档套餐档位与定价全景·2.1 价格梯度怎么看",
+            "score": 0.7577
+          },
+          {
+            "chunk_id": "D13#008",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.3 在 IDE 中重度使用 AI 编程工具",
+            "score": 0.749
+          },
+          {
+            "chunk_id": "D13#010",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·四、开通与使用：从下单到首次调用·4.1 三步完成接入",
+            "score": 0.7487
+          }
+        ],
+        "latency_total_s": 7.95
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": true
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-13",
+      "type": "fact",
+      "subtype": "calc_example",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 3,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.04,
+        "latency_generate_s": 16.66,
+        "latency_total_s": 17.69
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "费用3.84元及免费包扣减事实与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "费用数字与计算步骤均正确，与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "费用计算与免费包扣减均同金标，无关键事实错误",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D11#007】根据混元生文计费概述中的费用计算示例，用户当月首次使用 Hunyuan-role-latest 模型，可优先消耗首次开通发放的 100 万 tokens 免费资源包（共享消耗，有效期 1 年，见 D11#004）。累计调用共 200 万 tokens 时，前 100 万 tokens 由免费资源包抵扣，剩余 100 万 tokens 需通过后付费结算。\n\n示例给出：假设剩余需结算的 100 万 tokens 中，使用了 80 万 tokens 输入、20 万 tokens 输出。Hunyuan-role-latest 后付费刊例价为输入 2.4 元/每百万 tokens、输出 9.6 元/每百万 tokens（见 D11#005）。费用计算如下：\n\n- 输入费用：800000 / 1000000 × 2.4 = 1.92 元  \n- 输出费用：200000 / 1000000 × 9.6 = 1.92 元  \n- 合计：1.92 + 1.92 = **3.84 元**\n\n因此，在开通后付费的前提下，用户当月需支付 3.84 元。  \n（若未主动开通后付费，免费包耗尽后将出现计费异常提示，不会自动扣费，见 D11#005。）",
+        "retrieved": [
+          {
+            "chunk_id": "D12#007",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·免费额度",
+            "score": 0.7734
+          },
+          {
+            "chunk_id": "D12#006",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·预付费资源包",
+            "score": 0.7621
+          },
+          {
+            "chunk_id": "D11#007",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·费用计算示例·后付费",
+            "score": 0.7581
+          },
+          {
+            "chunk_id": "D11#005",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·混元生文价格说明·token 后付费",
+            "score": 0.7561
+          },
+          {
+            "chunk_id": "D12#004",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·API 按量定价（元/百万 Tokens）",
+            "score": 0.7516
+          },
+          {
+            "chunk_id": "D12#005",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·API 按量定价（元/百万 Tokens）",
+            "score": 0.7499
+          },
+          {
+            "chunk_id": "D11#004",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·免费额度",
+            "score": 0.7063
+          },
+          {
+            "chunk_id": "D12#003",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·模型矩阵",
+            "score": 0.7056
+          }
+        ],
+        "latency_total_s": 17.69
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-14",
+      "type": "fact",
+      "subtype": "same_topic_multi_source",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.18,
+        "latency_generate_s": 8.66,
+        "latency_total_s": 9.84
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "功能列表与金标完全一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "功能列表与金标一致，关键事实正确",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "功能列表与金标一致，关键事实正确",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "complete",
+              "reason": "覆盖全部五项更新要点，无遗漏",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "待评回答完整列出五项更新，覆盖所有要点",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "覆盖全部五个要点，无遗漏。",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "complete",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D06#000】  \n根据参考资料，ima.copilot 2.1.1(3544)版本更新的功能如下：  \n1. 优化网页访问体验；  \n2. PDF对照翻译支持至21种语言；  \n3. 共享知识库新增协作成员；  \n4. 知识库支持发起录音纪要；  \n5. 修复一些已知问题，体验更流畅。  \n\n（同版功能列表亦见于 D06#001、D07#000、D07#001 等文档）",
+        "retrieved": [
+          {
+            "chunk_id": "D06#000",
+            "doc_id": "D06",
+            "section": "摘要(开头)",
+            "score": 0.8474
+          },
+          {
+            "chunk_id": "D06#001",
+            "doc_id": "D06",
+            "section": "IMA 藏不住了！4个新功能曝光，实测超好用",
+            "score": 0.8444
+          },
+          {
+            "chunk_id": "D07#000",
+            "doc_id": "D07",
+            "section": "摘要(开头)",
+            "score": 0.8201
+          },
+          {
+            "chunk_id": "D07#001",
+            "doc_id": "D07",
+            "section": "IMA 新功能：50人协作 + 21语翻译，效率直接拉满",
+            "score": 0.8133
+          },
+          {
+            "chunk_id": "D04#000",
+            "doc_id": "D04",
+            "section": "摘要(开头)",
+            "score": 0.7138
+          },
+          {
+            "chunk_id": "D04#001",
+            "doc_id": "D04",
+            "section": "亲测效果：腾讯ima 2.0如何让复杂任务变得轻松",
+            "score": 0.7106
+          },
+          {
+            "chunk_id": "D02#017",
+            "doc_id": "D02",
+            "section": "ima·七、ima 的知识 Agent「copilot」功能是什么？·2. copilot核心能力",
+            "score": 0.7027
+          },
+          {
+            "chunk_id": "D03#002",
+            "doc_id": "D03",
+            "section": "ima.copilot·基本信息",
+            "score": 0.6927
+          }
+        ],
+        "latency_total_s": 9.84
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-15",
+      "type": "fact",
+      "subtype": "deep_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.21,
+        "latency_generate_s": 14.88,
+        "latency_total_s": 16.1
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "包含金标100万1年要点，但扩展未提及的embedding额度",
+              "score": 1
+            },
+            {
+              "verdict": "correct",
+              "reason": "100万tokens与1年有效期关键事实正确",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "包含金标100万tokens及1年有效期，无关键错误",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "2/3",
+          "stable": false,
+          "disagreement": [
+            "partial",
+            "correct",
+            "correct"
+          ]
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D11#004】首次开通腾讯混元大模型服务后，混元生文将发放一定量级的免费调用额度，以一次性的免费资源包形式发放，并在计费结算时优先扣减。具体免费额度与有效期如下：\n\n- **Hunyuan-a13b、Hunyuan-role-latest、Hunyuan-translation、Hunyuan-translation-lite、Tencent HY Vision 1.5 Instruct、Hunyuan-turbos-vision、Hunyuan-t1-vision、Hunyuan-turbos-vision-video**：共 100 万 tokens，共享消耗；资源包有效期为 1 年，自开通服务之日起 1 年内若未使用完则过期作废。\n- **Hunyuan-embedding**：100 万 tokens，资源包有效期为 1 年。\n\n此外，参考资料 D12#007 中提到：首次开通即享 100 万 Tokens 免费资源包（1 年有效），且 Hunyuan-lite 完全免费。",
+        "retrieved": [
+          {
+            "chunk_id": "D11#004",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·免费额度",
+            "score": 0.8749
+          },
+          {
+            "chunk_id": "D11#000",
+            "doc_id": "D11",
+            "section": "摘要(开头)",
+            "score": 0.8595
+          },
+          {
+            "chunk_id": "D11#003",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·开通方式",
+            "score": 0.8384
+          },
+          {
+            "chunk_id": "D12#007",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·免费额度",
+            "score": 0.8074
+          },
+          {
+            "chunk_id": "D11#005",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·混元生文价格说明·token 后付费",
+            "score": 0.7376
+          },
+          {
+            "chunk_id": "D11#001",
+            "doc_id": "D11",
+            "section": "混元生文计费概述",
+            "score": 0.7289
+          },
+          {
+            "chunk_id": "D11#002",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·计费方式",
+            "score": 0.7239
+          },
+          {
+            "chunk_id": "D12#002",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·厂商背景",
+            "score": 0.7208
+          }
+        ],
+        "latency_total_s": 16.1
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-16",
+      "type": "fact",
+      "subtype": "deep_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": false,
+        "retrieval_rank": 4,
+        "refusal_expected": false,
+        "refusal_detected": true,
+        "refusal_accuracy": false,
+        "latency_retrieve_s": 0.87,
+        "latency_generate_s": 17.34,
+        "latency_total_s": 18.21
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "incorrect",
+              "reason": "待评称库无相关内容，但金标出处D02明确有说明",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "称知识库无登录方式信息，但D02明文记载，关键错误",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "待评称无相关信息，但金标及出处明确记载登录方式",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "incorrect",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 0,
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。库里现有资料涉及ima的下载安装方式（如D10#001提及Windows客户端、Mac客户端和微信小程序）、界面布局（D10#002）、多端同步与微信生态绑定（D08#002）、知识库付费加入（D02#005）及商业化状态（D02#006）等，但均未说明支持哪些账号注册和登录方式。",
+        "retrieved": [
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.6087
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.5998
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.5643
+          },
+          {
+            "chunk_id": "D02#005",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·3. 知识库付费加入",
+            "score": 0.5563
+          },
+          {
+            "chunk_id": "D10#000",
+            "doc_id": "D10",
+            "section": "摘要(开头)",
+            "score": 0.5556
+          },
+          {
+            "chunk_id": "D10#002",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第二步：认识界面布局",
+            "score": 0.5509
+          },
+          {
+            "chunk_id": "D02#006",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·4. 商业化状态",
+            "score": 0.5508
+          },
+          {
+            "chunk_id": "D08#000",
+            "doc_id": "D08",
+            "section": "摘要(开头)",
+            "score": 0.5449
+          }
+        ],
+        "latency_total_s": 18.21
+      },
+      "attribution": {
+        "layer": "retrieval",
+        "reason": "金标未召回，模型无据可答而拒答",
+        "errors": [
+          "错误拒答",
+          "事实错误"
+        ],
+        "needs_review": false
+      },
+      "attribution_final": "retrieval"
+    },
+    {
+      "id": "F-17",
+      "type": "fact",
+      "subtype": "timeline_detail",
+      "rule": {
+        "retrieval_hit": false,
+        "retrieval_hit_top3": false,
+        "retrieval_rank": null,
+        "refusal_expected": false,
+        "refusal_detected": true,
+        "refusal_accuracy": false,
+        "latency_retrieve_s": 1.28,
+        "latency_generate_s": 14.42,
+        "latency_total_s": 15.7
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "incorrect",
+              "reason": "声称未提及上线时间，与金标明确日期矛盾",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "待评称未提及上线时间，与金标D03明确时间矛盾",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "声称库未提及上线时间，与金标D03记载矛盾",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "incorrect",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 0,
+      "record": {
+        "answer": "【依据 D01】知识库中没有找到与该问题相关的可靠内容。库里实际有关于ima知识库广场的功能与示例介绍（如覆盖科技、金融等20+行业，累积沉淀4亿+份知识库文件，并列举了法律、金融等行业的示例知识库），但未提及广场的具体上线时间。",
+        "retrieved": [
+          {
+            "chunk_id": "D01#009",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·公域知识探索：让知识流动起来",
+            "score": 0.7041
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.6477
+          },
+          {
+            "chunk_id": "D08#000",
+            "doc_id": "D08",
+            "section": "摘要(开头)",
+            "score": 0.6213
+          },
+          {
+            "chunk_id": "D10#002",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第二步：认识界面布局",
+            "score": 0.6154
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.6031
+          },
+          {
+            "chunk_id": "D02#009",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·3. 个性化知识管理与沉淀",
+            "score": 0.5989
+          },
+          {
+            "chunk_id": "D01#001",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·知识碎片，轻松整理入库",
+            "score": 0.5961
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.5927
+          }
+        ],
+        "latency_total_s": 15.7
+      },
+      "attribution": {
+        "layer": "retrieval",
+        "reason": "金标未召回，模型无据可答而拒答",
+        "errors": [
+          "错误拒答",
+          "事实错误"
+        ],
+        "needs_review": false
+      },
+      "attribution_final": "retrieval"
+    },
+    {
+      "id": "F-18",
+      "type": "fact",
+      "subtype": "historical_version",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.12,
+        "latency_generate_s": 5.61,
+        "latency_total_s": 6.73
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "核心更新与版本号均与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "核心更新名称及版本号与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "两大更新与版本号均与金标一致，无关键事实错误",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D05】根据参考资料 D05#001 记载，腾讯ima 1.9.3 版本带来的两大核心更新是：**AI图像生成**和**笔记导出PDF**。",
+        "retrieved": [
+          {
+            "chunk_id": "D05#001",
+            "doc_id": "D05",
+            "section": "腾讯ima1.9.3：AI图像生成与PDF导出体验尝鲜",
+            "score": 0.6295
+          },
+          {
+            "chunk_id": "D06#000",
+            "doc_id": "D06",
+            "section": "摘要(开头)",
+            "score": 0.6261
+          },
+          {
+            "chunk_id": "D06#001",
+            "doc_id": "D06",
+            "section": "IMA 藏不住了！4个新功能曝光，实测超好用",
+            "score": 0.6217
+          },
+          {
+            "chunk_id": "D07#002",
+            "doc_id": "D07",
+            "section": "IMA 新功能：50人协作 + 21语翻译，效率直接拉满·优化网页访问体验",
+            "score": 0.6012
+          },
+          {
+            "chunk_id": "D04#001",
+            "doc_id": "D04",
+            "section": "亲测效果：腾讯ima 2.0如何让复杂任务变得轻松",
+            "score": 0.5944
+          },
+          {
+            "chunk_id": "D07#000",
+            "doc_id": "D07",
+            "section": "摘要(开头)",
+            "score": 0.5911
+          },
+          {
+            "chunk_id": "D06#002",
+            "doc_id": "D06",
+            "section": "IMA 藏不住了！4个新功能曝光，实测超好用·一、网页访问体验升级，流畅度翻倍",
+            "score": 0.5835
+          },
+          {
+            "chunk_id": "D07#001",
+            "doc_id": "D07",
+            "section": "IMA 新功能：50人协作 + 21语翻译，效率直接拉满",
+            "score": 0.5807
+          }
+        ],
+        "latency_total_s": 6.73
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-19",
+      "type": "fact",
+      "subtype": "feature_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.43,
+        "latency_generate_s": 11.66,
+        "latency_total_s": 13.09
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "关键事实与金标一致，无错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "待评回答关键事实与金标完全一致，无错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "关键事实与金标一致，无错误",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "complete",
+              "reason": "完整覆盖任务工作方式与申请开通所有要点",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "要点全部覆盖，工作方式及申请流程均完整。",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "要点全部覆盖，语义与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "complete",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D04#002】  \n**工作方式**：在 ima 2.0 的任务模式中，用户只需在任务框里输入一句话（例如“请帮我分析ERP市场的最新趋势，并生成报告”），ima.copilot 就会自动将任务拆解成多个步骤（如搜集资料、分析数据、生成报告等），并自动调用相关工具完成每一步工作。用户还可以上传参考文档或链接，帮助系统理解需求，使生成的报告更加精准。这种“分工合作”的方式能事半功倍。  \n\n**开通方式**：目前该功能需【申请体验】。版本更新成功后，需在【首页--任务模式--申请体验】提交申请，等待开通。  \n\n（知识库中 D04#001、D04#000 也提及了腾讯 ima 2.0 及任务模式的相关片段，但上述 D04#002 为完整说明。）",
+        "retrieved": [
+          {
+            "chunk_id": "D04#002",
+            "doc_id": "D04",
+            "section": "亲测效果：腾讯ima 2.0如何让复杂任务变得轻松·解决方案：任务模式",
+            "score": 0.6957
+          },
+          {
+            "chunk_id": "D04#001",
+            "doc_id": "D04",
+            "section": "亲测效果：腾讯ima 2.0如何让复杂任务变得轻松",
+            "score": 0.6761
+          },
+          {
+            "chunk_id": "D04#000",
+            "doc_id": "D04",
+            "section": "摘要(开头)",
+            "score": 0.5668
+          },
+          {
+            "chunk_id": "D02#008",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·2. 多模态内容深度解读",
+            "score": 0.5139
+          },
+          {
+            "chunk_id": "D06#001",
+            "doc_id": "D06",
+            "section": "IMA 藏不住了！4个新功能曝光，实测超好用",
+            "score": 0.5096
+          },
+          {
+            "chunk_id": "D02#011",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·5. 共享协作与团队效率",
+            "score": 0.5085
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.5079
+          },
+          {
+            "chunk_id": "D02#010",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·4. AI辅助创作与设计",
+            "score": 0.5044
+          }
+        ],
+        "latency_total_s": 13.09
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "F-20",
+      "type": "fact",
+      "subtype": "deep_detail",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.42,
+        "latency_generate_s": 6.51,
+        "latency_total_s": 7.92
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "音频格式列举与金标一致，无关键错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "音频格式列举与金标一致，无关键事实错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "音频格式列举与金标一致，无关键事实错误",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D02】ima 知识库支持导入录音和音频文件，其支持的音频格式包括但不限于：MP3、WAV、M4A等常见音频格式（参见 D02#013“录音/音频格式”部分）。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#013",
+            "doc_id": "D02",
+            "section": "ima·四、ima 支持导入哪些文件格式？",
+            "score": 0.7688
+          },
+          {
+            "chunk_id": "D01#001",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·知识碎片，轻松整理入库",
+            "score": 0.7369
+          },
+          {
+            "chunk_id": "D01#000",
+            "doc_id": "D01",
+            "section": "摘要(开头)",
+            "score": 0.6639
+          },
+          {
+            "chunk_id": "D10#003",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第三步：创建个人知识库",
+            "score": 0.6399
+          },
+          {
+            "chunk_id": "D08#000",
+            "doc_id": "D08",
+            "section": "摘要(开头)",
+            "score": 0.5919
+          },
+          {
+            "chunk_id": "D02#009",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·3. 个性化知识管理与沉淀",
+            "score": 0.5874
+          },
+          {
+            "chunk_id": "D01#005",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·你可以这样用ima",
+            "score": 0.5805
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.5794
+          }
+        ],
+        "latency_total_s": 7.92
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-01",
+      "type": "refusal",
+      "subtype": "internal_params",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.28,
+        "latency_generate_s": 17.71,
+        "latency_total_s": 18.99
+      },
+      "judge": {},
+      "record": {
+        "answer": "【依据 D01#001, D02#008】知识库中没有找到与该问题相关的可靠内容。库里关于 ima 的介绍主要见于 D01#001 和 D02#008，其中提及 ima 支持 PDF/Word/PPT/Excel、图片、音频等多格式内容导入与深度解析、OCR 识别、翻译摘要等功能，但并未说明其内部检索所用的具体切块参数（chunk size）。另有一些文档（如 D19#042、D19#039）讨论了 small-to-big 切块技术（小块 175 tokens、大块 512 tokens 等）及不同 chunk size 的对比实验，但属于通用检索增强研究，未指明应用于 ima 产品。",
+        "retrieved": [
+          {
+            "chunk_id": "D19#042",
+            "doc_id": "D19",
+            "section": "p.6",
+            "score": 0.5587
+          },
+          {
+            "chunk_id": "D19#041",
+            "doc_id": "D19",
+            "section": "p.5",
+            "score": 0.542
+          },
+          {
+            "chunk_id": "D16#022",
+            "doc_id": "D16",
+            "section": "p.2",
+            "score": 0.5151
+          },
+          {
+            "chunk_id": "D02#008",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·2. 多模态内容深度解读",
+            "score": 0.5031
+          },
+          {
+            "chunk_id": "D19#021",
+            "doc_id": "D19",
+            "section": "p.3",
+            "score": 0.5026
+          },
+          {
+            "chunk_id": "D19#039",
+            "doc_id": "D19",
+            "section": "p.5",
+            "score": 0.4957
+          },
+          {
+            "chunk_id": "D19#038",
+            "doc_id": "D19",
+            "section": "p.5",
+            "score": 0.4922
+          },
+          {
+            "chunk_id": "D01#001",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·知识碎片，轻松整理入库",
+            "score": 0.4813
+          }
+        ],
+        "latency_total_s": 18.99
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-02",
+      "type": "refusal",
+      "subtype": "competitor_data",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 0.98,
+        "latency_generate_s": 7.81,
+        "latency_total_s": 8.79
+      },
+      "judge": {},
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。库里主要包含腾讯混元大模型及 TokenHub 的计费模式、免费额度、Hy Token Plan 套餐解析等信息（如 D11 系列文档的混元生文计费概述、免费额度说明，D13 系列文档的 Hy Token Plan 上线解析等），未涉及腾讯元宝的日活跃用户数（DAU）数据。",
+        "retrieved": [
+          {
+            "chunk_id": "D11#000",
+            "doc_id": "D11",
+            "section": "摘要(开头)",
+            "score": 0.4157
+          },
+          {
+            "chunk_id": "D11#005",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·混元生文价格说明·token 后付费",
+            "score": 0.4155
+          },
+          {
+            "chunk_id": "D11#001",
+            "doc_id": "D11",
+            "section": "混元生文计费概述",
+            "score": 0.4113
+          },
+          {
+            "chunk_id": "D13#001",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析",
+            "score": 0.4098
+          },
+          {
+            "chunk_id": "D12#006",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·预付费资源包",
+            "score": 0.4064
+          },
+          {
+            "chunk_id": "D11#002",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·计费方式",
+            "score": 0.4058
+          },
+          {
+            "chunk_id": "D13#012",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·五、用前先 0 元试一遍：新人免费体验包",
+            "score": 0.4032
+          },
+          {
+            "chunk_id": "D11#004",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·免费额度",
+            "score": 0.4004
+          }
+        ],
+        "latency_total_s": 8.79
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-03",
+      "type": "refusal",
+      "subtype": "undisclosed_ops",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.01,
+        "latency_generate_s": 12.32,
+        "latency_total_s": 13.33
+      },
+      "judge": {},
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。库里实际有关于 ima 的产品概述（D02#001）、免费与商业化状态（D02#002、D02#003、D02#006）、核心功能（D02#007）、多端同步与微信生态（D08#002）、测评体验（D08#001）及下载安装（D10#001）等相关内容，但均未提及月活跃用户数（MAU）信息。",
+        "retrieved": [
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.5692
+          },
+          {
+            "chunk_id": "D02#006",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·4. 商业化状态",
+            "score": 0.553
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.5413
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.5409
+          },
+          {
+            "chunk_id": "D02#007",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·1. 信息获取与智能问答",
+            "score": 0.5356
+          },
+          {
+            "chunk_id": "D02#002",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·1. 基础功能免费",
+            "score": 0.5281
+          },
+          {
+            "chunk_id": "D02#003",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·2. copilot 算力机制",
+            "score": 0.526
+          },
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.5204
+          }
+        ],
+        "latency_total_s": 13.33
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-04",
+      "type": "refusal",
+      "subtype": "undisclosed_ops",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.07,
+        "latency_generate_s": 8.51,
+        "latency_total_s": 9.58
+      },
+      "judge": {},
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。知识库中包含 ima 产品的定位（腾讯推出的AI工作台、面向C端用户的AI个人知识管理工具）、上线及版本迭代时间、核心功能（如智能问答、多模态解读、个性化知识管理、AI辅助创作、共享协作与团队效率）以及基础功能免费等信息，但未涉及 ima 产品团队的员工规模和内部组织架构。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.5789
+          },
+          {
+            "chunk_id": "D02#011",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·5. 共享协作与团队效率",
+            "score": 0.5735
+          },
+          {
+            "chunk_id": "D02#000",
+            "doc_id": "D02",
+            "section": "摘要(开头)",
+            "score": 0.5678
+          },
+          {
+            "chunk_id": "D02#021",
+            "doc_id": "D02",
+            "section": "ima·十一、ima 支持团队协作吗？",
+            "score": 0.5416
+          },
+          {
+            "chunk_id": "D02#009",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·3. 个性化知识管理与沉淀",
+            "score": 0.5413
+          },
+          {
+            "chunk_id": "D02#008",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·2. 多模态内容深度解读",
+            "score": 0.5196
+          },
+          {
+            "chunk_id": "D02#007",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·1. 信息获取与智能问答",
+            "score": 0.518
+          },
+          {
+            "chunk_id": "D02#010",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·4. AI辅助创作与设计",
+            "score": 0.5095
+          }
+        ],
+        "latency_total_s": 9.58
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-05",
+      "type": "refusal",
+      "subtype": "undisclosed_ops",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.14,
+        "latency_generate_s": 8.99,
+        "latency_total_s": 10.13
+      },
+      "judge": {},
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。库里实际有关于腾讯混元大模型的开通认证方式、免费额度（如首次开通享100万Tokens免费资源包）、计费模式（后付费日结和预付费）及API按量定价与预付费资源包价格等内容。",
+        "retrieved": [
+          {
+            "chunk_id": "D11#003",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·开通方式",
+            "score": 0.6723
+          },
+          {
+            "chunk_id": "D12#002",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·厂商背景",
+            "score": 0.6613
+          },
+          {
+            "chunk_id": "D12#007",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·免费额度",
+            "score": 0.6594
+          },
+          {
+            "chunk_id": "D11#000",
+            "doc_id": "D11",
+            "section": "摘要(开头)",
+            "score": 0.6455
+          },
+          {
+            "chunk_id": "D11#001",
+            "doc_id": "D11",
+            "section": "混元生文计费概述",
+            "score": 0.6373
+          },
+          {
+            "chunk_id": "D11#002",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·计费方式",
+            "score": 0.615
+          },
+          {
+            "chunk_id": "D12#006",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·预付费资源包",
+            "score": 0.606
+          },
+          {
+            "chunk_id": "D12#005",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·API 按量定价（元/百万 Tokens）",
+            "score": 0.5975
+          }
+        ],
+        "latency_total_s": 10.13
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-06",
+      "type": "refusal",
+      "subtype": "detail_absent",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.13,
+        "latency_generate_s": 11.08,
+        "latency_total_s": 12.22
+      },
+      "judge": {},
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。库里提供了 ima 的下载与安装方式（如访问 IMA 官网 ima.qq.com 选择对应版本客户端下载安装，整个安装过程不超过3分钟）以及支持 Windows 客户端、Mac 客户端和微信小程序等平台信息（参见 D10#001、D03#002），但未提及安装包具体大小（MB）。",
+        "retrieved": [
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.4769
+          },
+          {
+            "chunk_id": "D10#000",
+            "doc_id": "D10",
+            "section": "摘要(开头)",
+            "score": 0.3969
+          },
+          {
+            "chunk_id": "D03#002",
+            "doc_id": "D03",
+            "section": "ima.copilot·基本信息",
+            "score": 0.3476
+          },
+          {
+            "chunk_id": "D10#002",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第二步：认识界面布局",
+            "score": 0.344
+          },
+          {
+            "chunk_id": "D19#041",
+            "doc_id": "D19",
+            "section": "p.5",
+            "score": 0.3393
+          },
+          {
+            "chunk_id": "D02#015",
+            "doc_id": "D02",
+            "section": "ima·六、ima 的免费存储空间有多少？如何扩容？",
+            "score": 0.3309
+          },
+          {
+            "chunk_id": "D19#114",
+            "doc_id": "D19",
+            "section": "p.14",
+            "score": 0.3178
+          },
+          {
+            "chunk_id": "D02#003",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·2. copilot 算力机制",
+            "score": 0.3171
+          }
+        ],
+        "latency_total_s": 12.22
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-07",
+      "type": "refusal",
+      "subtype": "detail_absent",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.24,
+        "latency_generate_s": 14.64,
+        "latency_total_s": 15.88
+      },
+      "judge": {},
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。库里 D02#019 提到发布 Skill 后需要等待平台审核，审核通过后 Skill 会显示在广场的 Skills 板块，但未说明一般需要几个工作日。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#019",
+            "doc_id": "D02",
+            "section": "ima·九、ima 的知识号怎么发布 Skill？",
+            "score": 0.6975
+          },
+          {
+            "chunk_id": "D09#007",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势·我的亲身体验：如何用IMA\"吃透\"一本书·第四步：知识检验",
+            "score": 0.5696
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.5649
+          },
+          {
+            "chunk_id": "D01#004",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·AI笔记，更懂你的创作伙伴",
+            "score": 0.5617
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.5561
+          },
+          {
+            "chunk_id": "D01#001",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·知识碎片，轻松整理入库",
+            "score": 0.5511
+          },
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.5511
+          },
+          {
+            "chunk_id": "D02#011",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·5. 共享协作与团队效率",
+            "score": 0.5479
+          }
+        ],
+        "latency_total_s": 15.88
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-08",
+      "type": "refusal",
+      "subtype": "detail_absent",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 0.98,
+        "latency_generate_s": 15.23,
+        "latency_total_s": 16.21
+      },
+      "judge": {},
+      "record": {
+        "answer": "【依据 D13#002】知识库中没有找到与该问题相关的可靠内容。库里实际有关于 Hy Token Plan 于 2026 年 4 月上线及混元 Hy3 preview 模型（295B 参数、21B 激活 MoE 架构、原生 256K 上下文等）的介绍，未提及混元 Hy3 正式版（非 preview）的发布时间。",
+        "retrieved": [
+          {
+            "chunk_id": "D13#002",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·一、Hy Token Plan 是什么：一个套餐直通最新混元",
+            "score": 0.6496
+          },
+          {
+            "chunk_id": "D13#009",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.4 高频 Function Calling 与结构化输出",
+            "score": 0.6151
+          },
+          {
+            "chunk_id": "D13#014",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·七、写在最后",
+            "score": 0.6148
+          },
+          {
+            "chunk_id": "D13#013",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·六、和通用 Token Plan 怎么搭配",
+            "score": 0.6074
+          },
+          {
+            "chunk_id": "D13#004",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·二、4 档套餐档位与定价全景·2.1 价格梯度怎么看",
+            "score": 0.6052
+          },
+          {
+            "chunk_id": "D13#000",
+            "doc_id": "D13",
+            "section": "摘要(开头)",
+            "score": 0.6049
+          },
+          {
+            "chunk_id": "D13#012",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·五、用前先 0 元试一遍：新人免费体验包",
+            "score": 0.5994
+          },
+          {
+            "chunk_id": "D13#001",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析",
+            "score": 0.595
+          }
+        ],
+        "latency_total_s": 16.21
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-09",
+      "type": "refusal",
+      "subtype": "meta_data_absent",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.09,
+        "latency_generate_s": 8.42,
+        "latency_total_s": 9.51
+      },
+      "judge": {},
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。库里提供了 Ragas 框架的 GitHub 仓库地址（D14#009：https://github.com/explodinggradients/ragas），以及其作为检索增强生成（RAG）自动化评估框架的介绍（如 D14#001、D14#000）、评估指标（如 D14#044 中的 faithfulness、answer relevance、context relevance）及与 ARES 等方法的对比（如 D18#019、D18#058）等内容，但未提及该仓库的 star 数量与被引用次数。",
+        "retrieved": [
+          {
+            "chunk_id": "D14#010",
+            "doc_id": "D14",
+            "section": "p.2",
+            "score": 0.5756
+          },
+          {
+            "chunk_id": "D14#000",
+            "doc_id": "D14",
+            "section": "摘要(首页)",
+            "score": 0.5709
+          },
+          {
+            "chunk_id": "D14#045",
+            "doc_id": "D14",
+            "section": "p.5",
+            "score": 0.5606
+          },
+          {
+            "chunk_id": "D14#009",
+            "doc_id": "D14",
+            "section": "p.1",
+            "score": 0.5592
+          },
+          {
+            "chunk_id": "D14#044",
+            "doc_id": "D14",
+            "section": "p.5",
+            "score": 0.5579
+          },
+          {
+            "chunk_id": "D14#001",
+            "doc_id": "D14",
+            "section": "p.1",
+            "score": 0.5514
+          },
+          {
+            "chunk_id": "D18#019",
+            "doc_id": "D18",
+            "section": "p.2",
+            "score": 0.5445
+          },
+          {
+            "chunk_id": "D18#058",
+            "doc_id": "D18",
+            "section": "p.7",
+            "score": 0.5284
+          }
+        ],
+        "latency_total_s": 9.51
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "J-10",
+      "type": "refusal",
+      "subtype": "competitor_data",
+      "rule": {
+        "retrieval_hit": null,
+        "retrieval_hit_top3": null,
+        "retrieval_rank": null,
+        "refusal_expected": true,
+        "refusal_detected": true,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.03,
+        "latency_generate_s": 12.5,
+        "latency_total_s": 13.53
+      },
+      "judge": {},
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。知识库中主要包含腾讯ima的免费与商业化状态（如基础功能免费、知识库付费加入机制）、多端同步与微信生态绑定功能、适用人群与场景（学生党、打工人、自媒体人等），以及下载安装方式，但未涉及应用商店评分或差评率信息。",
+        "retrieved": [
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.6482
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.6391
+          },
+          {
+            "chunk_id": "D02#006",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·4. 商业化状态",
+            "score": 0.596
+          },
+          {
+            "chunk_id": "D08#000",
+            "doc_id": "D08",
+            "section": "摘要(开头)",
+            "score": 0.5914
+          },
+          {
+            "chunk_id": "D08#003",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡适用场景",
+            "score": 0.5894
+          },
+          {
+            "chunk_id": "D02#002",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·1. 基础功能免费",
+            "score": 0.5696
+          },
+          {
+            "chunk_id": "D02#005",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·3. 知识库付费加入",
+            "score": 0.5691
+          },
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.5683
+          }
+        ],
+        "latency_total_s": 13.53
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "M-01",
+      "type": "multi_doc",
+      "subtype": "cross_doc_conflict",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": true,
+        "refusal_accuracy": false,
+        "latency_retrieve_s": 1.16,
+        "latency_generate_s": 16.53,
+        "latency_total_s": 17.68
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "incorrect",
+              "reason": "误称未提两百科及差异，实D02/D03即两百科",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "否认D02/D03为两百科，与金标明确对应矛盾",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "声称未提及两百科词条差异，与金标明确记载矛盾",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "incorrect",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "missing",
+              "reason": "未关联词条与差异，仅零散提时间片段，遗漏核心要点",
+              "score": 0
+            },
+            {
+              "verdict": "missing",
+              "reason": "称未提及两百科词条，差异要点全部遗漏",
+              "score": 0
+            },
+            {
+              "verdict": "missing",
+              "reason": "未提及两百科词条及差异，金标要点全遗漏",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "missing",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 0,
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。库里记录了ima的上线时间相关信息，例如D02#001记载“ima于2024年11月正式上线”，D08#001测评提及“ima是今年2月上线”，D03#003发展历程列出2024年10月Mac端上线等，但均未提及腾讯云百科或搜狗百科词条及其差异。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.7546
+          },
+          {
+            "chunk_id": "D02#000",
+            "doc_id": "D02",
+            "section": "摘要(开头)",
+            "score": 0.7458
+          },
+          {
+            "chunk_id": "D02#006",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·4. 商业化状态",
+            "score": 0.7281
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.7229
+          },
+          {
+            "chunk_id": "D03#003",
+            "doc_id": "D03",
+            "section": "ima.copilot·发展历程",
+            "score": 0.712
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.6877
+          },
+          {
+            "chunk_id": "D02#002",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·1. 基础功能免费",
+            "score": 0.6786
+          },
+          {
+            "chunk_id": "D02#005",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·3. 知识库付费加入",
+            "score": 0.6692
+          }
+        ],
+        "latency_total_s": 17.68
+      },
+      "attribution": {
+        "layer": "generation",
+        "reason": "金标已入 top-3 仍错误拒答",
+        "errors": [
+          "错误拒答",
+          "事实错误",
+          "要点遗漏"
+        ],
+        "needs_review": false
+      },
+      "attribution_final": "generation"
+    },
+    {
+      "id": "M-02",
+      "type": "multi_doc",
+      "subtype": "price_reconciliation",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.01,
+        "latency_generate_s": 25.38,
+        "latency_total_s": 26.38
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "关键事实如调价日期涨幅等均正确，与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "调价细节价格及口径不一致结论均与金标一致无错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "口径不完全一致及调价细节均与金标一致，无关键错误",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "未提及共有模型价格一致，缺a13b等价格例",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "遗漏第三方共有模型价格与官方一致要点",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "遗漏第三方共有模型价格与官方一致要点",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 1.5,
+      "record": {
+        "answer": "【依据 D11、D12】\n\n腾讯云官方计费文档（D11系列）与第三方对比文章（D12系列）关于混元 API 价格的口径**不完全一致**：\n\n1. **官方计费文档（D11）**：提供了混元生文 API 的计费方式（后付费/预付费，D11#002）、免费资源包与后付费结算顺序（D11#006）、具体刊例价表格（如 Hunyuan-role-latest 输入 2.4元/百万 tokens 等，D11#005）以及免费额度示例（暗示首次开通获 100 万 tokens 免费包，D11#007），但**全文未提及任何 2026 年调价信息**。\n2. **第三方对比文章（D12）**：明确提及 2026 年 3-4 月腾讯云经历两轮调价，模型 API 价格大幅上调（如 HY 2.0 Instruct 输入价涨幅 463%），AI 算力刊例价上调 5%（D12#002、D12#000）；并提示 2026 年 3 月起结束第三方模型免费公测、大幅上调混元自有模型价格（D12#007）。其提到的“100 万 Tokens 免费资源包、Hunyuan-lite 完全免费”与官方示例中的 100 万免费额度有吻合，但第三方未给出官方那样完整的型号价格表，且官方价格表（D11#005）未包含第三方所说的 HY 2.0 Instruct 等模型。因此二者在是否说明调价及价格信息详略上口径不一致。\n\n**哪篇提到了 2026 年的调价**：  \n提及 2026 年调价的是**第三方对比文章**，具体为【依据 D12#002】（厂商背景）、【依据 D12#007】（免费额度中的重要提示）、【依据 D12#000】（摘要）。官方文档 D11 中无任何 2026 年调价相关内容。",
+        "retrieved": [
+          {
+            "chunk_id": "D11#002",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·计费方式",
+            "score": 0.7735
+          },
+          {
+            "chunk_id": "D12#002",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·厂商背景",
+            "score": 0.7583
+          },
+          {
+            "chunk_id": "D12#007",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·免费额度",
+            "score": 0.7187
+          },
+          {
+            "chunk_id": "D11#005",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·混元生文价格说明·token 后付费",
+            "score": 0.7171
+          },
+          {
+            "chunk_id": "D11#007",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·费用计算示例·后付费",
+            "score": 0.7033
+          },
+          {
+            "chunk_id": "D11#006",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·计费与结算方式",
+            "score": 0.6969
+          },
+          {
+            "chunk_id": "D12#000",
+            "doc_id": "D12",
+            "section": "摘要(开头)",
+            "score": 0.6902
+          },
+          {
+            "chunk_id": "D11#003",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·开通方式",
+            "score": 0.6824
+          }
+        ],
+        "latency_total_s": 26.38
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": true
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "M-03",
+      "type": "multi_doc",
+      "subtype": "same_version_two_reports",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": false,
+        "retrieval_rank": 6,
+        "refusal_expected": false,
+        "refusal_detected": true,
+        "refusal_accuracy": false,
+        "latency_retrieve_s": 0.97,
+        "latency_generate_s": 15.74,
+        "latency_total_s": 16.71
+      },
+      "judge": {
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "missing",
+              "reason": "未提供两文相同与不同要点，仅称无对比内容",
+              "score": 0
+            },
+            {
+              "verdict": "missing",
+              "reason": "未提及两文相同与不同，金标要点全部遗漏",
+              "score": 0
+            },
+            {
+              "verdict": "missing",
+              "reason": "未提及两文对比，仅提单篇，遗漏所有相同不同要点",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "missing",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 0,
+      "record": {
+        "answer": "知识库中没有找到与该问题相关的可靠内容。库里仅有一篇提及 ima 2.1.1 版本的文章（D06#001《IMA 藏不住了！4个新功能曝光，实测超好用》），介绍了该版本优化网页访问、PDF对照翻译等更新功能，但未提及“AI局中友”与“黄记聊AI”两位作者及两篇实测报道的对比。",
+        "retrieved": [
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.6246
+          },
+          {
+            "chunk_id": "D01#004",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·AI笔记，更懂你的创作伙伴",
+            "score": 0.6239
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.6063
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.5903
+          },
+          {
+            "chunk_id": "D08#000",
+            "doc_id": "D08",
+            "section": "摘要(开头)",
+            "score": 0.5897
+          },
+          {
+            "chunk_id": "D06#001",
+            "doc_id": "D06",
+            "section": "IMA 藏不住了！4个新功能曝光，实测超好用",
+            "score": 0.5759
+          },
+          {
+            "chunk_id": "D09#001",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势",
+            "score": 0.5714
+          },
+          {
+            "chunk_id": "D02#010",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·4. AI辅助创作与设计",
+            "score": 0.5709
+          }
+        ],
+        "latency_total_s": 16.71
+      },
+      "attribution": {
+        "layer": "retrieval",
+        "reason": "金标未召回，模型无据可答而拒答",
+        "errors": [
+          "错误拒答",
+          "要点遗漏"
+        ],
+        "needs_review": false
+      },
+      "attribution_final": "retrieval"
+    },
+    {
+      "id": "M-04",
+      "type": "multi_doc",
+      "subtype": "outdated_vs_authoritative",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.13,
+        "latency_generate_s": 16.28,
+        "latency_total_s": 17.41
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "incorrect",
+              "reason": "误以D10三种为准，否定权威D02多平台清单",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "以过期文档D10为准，错列三种方式，违背金标权威清单",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "误以过期D10为准，清单错为三种，与金标矛盾",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "incorrect",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 0,
+      "record": {
+        "answer": "【依据 D10#001】  \n根据参考资料中 D10#001（及 D10#000 摘要开头）的明确表述：“IMA目前提供三种使用方式：Windows客户端、Mac客户端和微信小程序。” 这是针对“下载与安装”场景给出的使用方式清单。  \n\n而 D08#002 提到“手机/电脑/iPad随时记录，app/小程序/网页无缝衔接”，该内容位于“为什么推荐ima”的测评中，描述的是**多端同步与碎片化信息一键归档**的能力，并非对“使用方式”种类的官方定义（例如微信小程序可运行于手机/iPad，客户端运行于电脑，网页可能指小程序或内部跳转）。因此，应以 D10#001 的安装说明为准。  \n\n**现在的完整清单（依据 D10#001）为：**  \n1. Windows 客户端  \n2. Mac 客户端  \n3. 微信小程序  \n\n> 知识库中 D08#002 实际还提到了手机/电脑/iPad、app/小程序/网页等多端同步相关描述，但属于功能特性补充，不作为使用方式的基础分类依据。",
+        "retrieved": [
+          {
+            "chunk_id": "D10#001",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第一步：下载与安装",
+            "score": 0.8276
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.7733
+          },
+          {
+            "chunk_id": "D10#000",
+            "doc_id": "D10",
+            "section": "摘要(开头)",
+            "score": 0.7692
+          },
+          {
+            "chunk_id": "D02#006",
+            "doc_id": "D02",
+            "section": "ima·一、腾讯 ima 是免费的吗？·4. 商业化状态",
+            "score": 0.7622
+          },
+          {
+            "chunk_id": "D02#001",
+            "doc_id": "D02",
+            "section": "ima·概述",
+            "score": 0.7413
+          },
+          {
+            "chunk_id": "D02#007",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·1. 信息获取与智能问答",
+            "score": 0.7368
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.7344
+          },
+          {
+            "chunk_id": "D02#009",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·3. 个性化知识管理与沉淀",
+            "score": 0.7343
+          }
+        ],
+        "latency_total_s": 17.41
+      },
+      "attribution": {
+        "layer": "retrieval",
+        "reason": "多文档题金标未全部进 top-3（缺 ['D02']）",
+        "errors": [
+          "事实错误"
+        ],
+        "needs_review": false
+      },
+      "attribution_final": "data"
+    },
+    {
+      "id": "M-05",
+      "type": "multi_doc",
+      "subtype": "cross_doc_verification",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.19,
+        "latency_generate_s": 10.9,
+        "latency_total_s": 12.09
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "价格数值单位备注及一致结论均正确",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "价格数值单位备注及一致性均与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "价格数值单位备注一致，口径一致结论正确",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D11#005、D12#004】\n- **官方计费文档（D11#005）**记载：在“混元生文价格说明·token 后付费”中，Hunyuan-a13b 的刊例价（每百万 tokens）为输入 0.5 元、输出 2 元。\n- **第三方对比文（D12#004，出自《2026 国内七大 AI 大模型定价全对比》）**记载：Hunyuan-a13b 的 API 按量定价（元/百万 Tokens）为输入 0.5、输出 2，备注“入门之选”。\n\n两处记载的价格数值（输入 0.5、输出 2）与计费单位（元/百万 Tokens）完全相同，口径一致。",
+        "retrieved": [
+          {
+            "chunk_id": "D12#004",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·API 按量定价（元/百万 Tokens）",
+            "score": 0.6491
+          },
+          {
+            "chunk_id": "D12#005",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·API 按量定价（元/百万 Tokens）",
+            "score": 0.6253
+          },
+          {
+            "chunk_id": "D12#006",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·预付费资源包",
+            "score": 0.6247
+          },
+          {
+            "chunk_id": "D11#005",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·混元生文价格说明·token 后付费",
+            "score": 0.6104
+          },
+          {
+            "chunk_id": "D12#007",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·免费额度",
+            "score": 0.5942
+          },
+          {
+            "chunk_id": "D12#003",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·模型矩阵",
+            "score": 0.5938
+          },
+          {
+            "chunk_id": "D13#012",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·五、用前先 0 元试一遍：新人免费体验包",
+            "score": 0.5803
+          },
+          {
+            "chunk_id": "D13#007",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.2 Agent 工作负载与多轮深度推理",
+            "score": 0.5693
+          }
+        ],
+        "latency_total_s": 12.09
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-01",
+      "type": "reasoning",
+      "subtype": "cross_language",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 3,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.16,
+        "latency_generate_s": 24.52,
+        "latency_total_s": 25.67
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "incorrect",
+              "reason": "指标名称错误，将上下文精确率/召回率误为上下文相关性",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "待评指标context relevance与金标Context Precision/Recall不符",
+              "score": 0
+            },
+            {
+              "verdict": "incorrect",
+              "reason": "误将上下文精确率/召回率写为上下文相关性",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "incorrect",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "遗漏上下文精确率/召回率，覆盖忠实性等指标",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "覆盖忠实度与答案相关性，缺上下文精确率/召回率",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "覆盖忠实性、答案相关性及无参考，但遗漏上下文精确率/召回率。",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 0.5,
+      "record": {
+        "answer": "【依据 D14#044】根据参考资料，Ragas（即 RAGAS）是一个用于检索增强生成（RAG）管道的无参考（reference-free）评估框架（另见 D14#001）。该框架实现了三个质量方面的评测指标（D14#044、D14#045、D18#076）：\n1. **答案相关性（answer relevance）**：即答案是否解决了所提出的问题（D14#044）；\n2. **上下文相关性（context relevance）**：即检索到的上下文是否足够聚焦（D14#044）；\n3. **答案忠实性（answer faithfulness）**：D14#045 与 D18#076 显示 Ragas 包含此指标，且 D18#076 明确指出 ARES 在 context relevance、answer faithfulness 和 answer relevance 上超越了已有的 RAGAS 框架。\n\n因此，RAGAS 框架提出的无需参考答案的评测指标为：**context relevance（上下文相关性）、answer faithfulness（答案忠实性）、answer relevance（答案相关性）**。",
+        "retrieved": [
+          {
+            "chunk_id": "D18#007",
+            "doc_id": "D18",
+            "section": "p.1",
+            "score": 0.7063
+          },
+          {
+            "chunk_id": "D18#019",
+            "doc_id": "D18",
+            "section": "p.2",
+            "score": 0.7022
+          },
+          {
+            "chunk_id": "D14#009",
+            "doc_id": "D14",
+            "section": "p.1",
+            "score": 0.7018
+          },
+          {
+            "chunk_id": "D18#076",
+            "doc_id": "D18",
+            "section": "p.8",
+            "score": 0.6979
+          },
+          {
+            "chunk_id": "D14#001",
+            "doc_id": "D14",
+            "section": "p.1",
+            "score": 0.6948
+          },
+          {
+            "chunk_id": "D14#044",
+            "doc_id": "D14",
+            "section": "p.5",
+            "score": 0.6935
+          },
+          {
+            "chunk_id": "D14#000",
+            "doc_id": "D14",
+            "section": "摘要(首页)",
+            "score": 0.6934
+          },
+          {
+            "chunk_id": "D14#045",
+            "doc_id": "D14",
+            "section": "p.5",
+            "score": 0.6788
+          }
+        ],
+        "latency_total_s": 25.67
+      },
+      "attribution": {
+        "layer": "generation",
+        "reason": "召回上下文正确但生成错误（编造/误读/要点丢失）",
+        "errors": [
+          "事实错误"
+        ],
+        "needs_review": true
+      },
+      "attribution_final": "generation"
+    },
+    {
+      "id": "R-02",
+      "type": "reasoning",
+      "subtype": "positive_control",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.15,
+        "latency_generate_s": 18.84,
+        "latency_total_s": 20.0
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "准确列出三类偏差与一局限，无关键事实错误",
+              "score": 2
+            },
+            {
+              "verdict": "partial",
+              "reason": "列出四类正确，缺一致性发现且增补局限",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "核心偏差局限正确，但缺一致性事实且添额外局限",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "2/3",
+          "stable": false,
+          "disagreement": [
+            "correct",
+            "partial",
+            "partial"
+          ]
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "complete",
+              "reason": "覆盖三类偏差与局限，遗漏一致性发现属次要细节",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "覆盖三类偏差与推理局限，遗漏一致性发现属次要细节",
+              "score": 2
+            },
+            {
+              "verdict": "partial",
+              "reason": "覆盖四类偏差局限，遗漏强模型一致性发现",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "complete",
+          "score": 2,
+          "agreement": "2/3",
+          "stable": false,
+          "disagreement": [
+            "complete",
+            "complete",
+            "partial"
+          ]
+        }
+      },
+      "judge_avg": 1.5,
+      "record": {
+        "answer": "【依据 D02】根据参考资料 D15#002（p.1）的明确表述，LLM-as-a-judge（大模型裁判）存在的偏差和局限主要包括：\n- 位置偏差（position bias）\n- 冗长偏差（verbosity bias）\n- 自我增强偏差（self-enhancement bias）\n- 有限的推理能力（limited reasoning ability）\n\n此外，资料 D15#034（p.4）提及了位置偏差等局限；D15#018（p.2）同样列举了上述四项偏差与局限（位置偏差、冗长偏差、自我增强偏差、有限推理能力）；D15#051（p.6）指出 LLM 裁判在问题求解过程中可能仍会被上下文误导（misled by the context），这也属于一种局限。资料 D15#036（p.5）通过表格进一步展示了不同 LLM 裁判的位置偏差表现。",
+        "retrieved": [
+          {
+            "chunk_id": "D15#034",
+            "doc_id": "D15",
+            "section": "p.4",
+            "score": 0.7799
+          },
+          {
+            "chunk_id": "D15#002",
+            "doc_id": "D15",
+            "section": "p.1",
+            "score": 0.7665
+          },
+          {
+            "chunk_id": "D15#018",
+            "doc_id": "D15",
+            "section": "p.2",
+            "score": 0.7582
+          },
+          {
+            "chunk_id": "D15#001",
+            "doc_id": "D15",
+            "section": "p.1",
+            "score": 0.7244
+          },
+          {
+            "chunk_id": "D15#017",
+            "doc_id": "D15",
+            "section": "p.2",
+            "score": 0.7101
+          },
+          {
+            "chunk_id": "D15#000",
+            "doc_id": "D15",
+            "section": "摘要(首页)",
+            "score": 0.7075
+          },
+          {
+            "chunk_id": "D15#051",
+            "doc_id": "D15",
+            "section": "p.6",
+            "score": 0.7039
+          },
+          {
+            "chunk_id": "D15#036",
+            "doc_id": "D15",
+            "section": "p.5",
+            "score": 0.6729
+          }
+        ],
+        "latency_total_s": 20.0
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": true
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-03",
+      "type": "reasoning",
+      "subtype": "content_retrieval",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.3,
+        "latency_generate_s": 13.56,
+        "latency_total_s": 14.85
+      },
+      "judge": {
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "complete",
+              "reason": "待评回答完整覆盖金标五步要点",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "待评回答覆盖金标五步所有要点",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "覆盖全部五步要点，语义与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "complete",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D09#004、D09#005、D09#006、D09#007、D09#008】\n\n根据胜不凡在《腾讯IMA实战指南》中“我的亲身体验：如何用IMA‘吃透’一本书”的分享，五步方法如下：\n\n**第一步：深度拆解内容**（依据 D09#004）  \n直接提问：“请详细拆解《真需求》这本书讲了什么，核心观点是什么，启发读者应该怎么去做，去实操。”IMA 几秒钟后分析完毕，将书籍的核心观点、启发和具体实操步骤清晰列出。\n\n**第二步：溯源原文**（依据 D09#005）  \n光看要点不够时，每个要点旁边都有角码标记，点击后能立即看到原文出处，无需翻来覆去找原文。\n\n**第三步：深度理解**（依据 D09#006）  \n如果觉得答案太过简洁，进一步提问：“这样解释我还是不太理解，能不能举个例子？”IMA 立即给出案例辅助解释，让抽象概念变得具体可感。\n\n**第四步：知识检验**（依据 D09#007）  \n让 IMA“出5道选择题来考考我”，IMA 快速出题，并附上详细答案和解析，颠覆传统学习体验。\n\n**第五步：思维导图整理**（依据 D09#008）  \n为了让更好地记忆内容，让 IMA 以 Markdown 格式输出思维导图的核心要点（资料提及目前会分段输出、导入 Xmind 生成有问题，细节尚有改进空间）。",
+        "retrieved": [
+          {
+            "chunk_id": "D09#005",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势·我的亲身体验：如何用IMA\"吃透\"一本书·第二步：溯源原文",
+            "score": 0.6798
+          },
+          {
+            "chunk_id": "D09#007",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势·我的亲身体验：如何用IMA\"吃透\"一本书·第四步：知识检验",
+            "score": 0.679
+          },
+          {
+            "chunk_id": "D09#001",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势",
+            "score": 0.6782
+          },
+          {
+            "chunk_id": "D09#006",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势·我的亲身体验：如何用IMA\"吃透\"一本书·第三步：深度理解",
+            "score": 0.6738
+          },
+          {
+            "chunk_id": "D09#003",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势·我的亲身体验：如何用IMA\"吃透\"一本书",
+            "score": 0.6479
+          },
+          {
+            "chunk_id": "D09#004",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势·我的亲身体验：如何用IMA\"吃透\"一本书·第一步：深度拆解内容",
+            "score": 0.6249
+          },
+          {
+            "chunk_id": "D09#008",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势·我的亲身体验：如何用IMA\"吃透\"一本书·第五步：思维导图整理",
+            "score": 0.5872
+          },
+          {
+            "chunk_id": "D09#000",
+            "doc_id": "D09",
+            "section": "摘要(开头)",
+            "score": 0.5822
+          }
+        ],
+        "latency_total_s": 14.85
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-04",
+      "type": "reasoning",
+      "subtype": "cross_language",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": true,
+        "refusal_accuracy": false,
+        "latency_retrieve_s": 1.3,
+        "latency_generate_s": 13.24,
+        "latency_total_s": 14.54
+      },
+      "judge": {
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "missing",
+              "reason": "仅覆盖FP1，其余六点未给出，属少数要点遗漏",
+              "score": 0
+            },
+            {
+              "verdict": "missing",
+              "reason": "仅列出FP1，其余六失败点均未覆盖",
+              "score": 0
+            },
+            {
+              "verdict": "missing",
+              "reason": "仅提及FP1，其余六失败点未覆盖，属少数要点",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "missing",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 0,
+      "record": {
+        "answer": "【依据 D16#039】知识库中没有找到与该问题相关的可靠内容。库里资料（如 D16#003、D16#011、D16#012 等）提及从三个案例研究中总结出了 7 个失败点（failure points），且 D16#039 中仅具体列出了 FP1 Missing Content（即提问无法从可用文档回答时的情况），其余六个失败点未在提供的参考资料片段中给出。",
+        "retrieved": [
+          {
+            "chunk_id": "D16#015",
+            "doc_id": "D16",
+            "section": "p.2",
+            "score": 0.7647
+          },
+          {
+            "chunk_id": "D16#003",
+            "doc_id": "D16",
+            "section": "p.1",
+            "score": 0.727
+          },
+          {
+            "chunk_id": "D16#011",
+            "doc_id": "D16",
+            "section": "p.1",
+            "score": 0.7248
+          },
+          {
+            "chunk_id": "D16#012",
+            "doc_id": "D16",
+            "section": "p.1",
+            "score": 0.7144
+          },
+          {
+            "chunk_id": "D16#039",
+            "doc_id": "D16",
+            "section": "p.4",
+            "score": 0.7141
+          },
+          {
+            "chunk_id": "D16#013",
+            "doc_id": "D16",
+            "section": "p.1",
+            "score": 0.7073
+          },
+          {
+            "chunk_id": "D16#018",
+            "doc_id": "D16",
+            "section": "p.2",
+            "score": 0.6702
+          },
+          {
+            "chunk_id": "D16#014",
+            "doc_id": "D16",
+            "section": "p.2",
+            "score": 0.6553
+          }
+        ],
+        "latency_total_s": 14.54
+      },
+      "attribution": {
+        "layer": "generation",
+        "reason": "金标已入 top-3 仍错误拒答",
+        "errors": [
+          "错误拒答",
+          "要点遗漏"
+        ],
+        "needs_review": false
+      },
+      "attribution_final": "generation"
+    },
+    {
+      "id": "R-05",
+      "type": "reasoning",
+      "subtype": "cross_language",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.13,
+        "latency_generate_s": 14.31,
+        "latency_total_s": 15.43
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "涵盖三维度、合成数据微调、PPI及8任务等关键事实均正确",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "关键事实与金标一致，无错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "三个维度方法及PPI与任务数均正确无矛盾",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "complete",
+              "reason": "核心要点全覆盖，仅缺具体数据集名与几百条标注数。",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "要点基本覆盖，仅缺具体数据集名与几百条标注数",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "覆盖三维度、合成数据微调、PPI及8任务验证等核心要点",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "complete",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D18#002】ARES（Automated RAG Evaluation System）实现对 RAG 系统的自动化评测主要通过以下机制（结合其他资料补充）：\n\n1. **评测维度**：ARES 沿上下文相关性（context relevance）、答案忠实性（answer faithfulness）和答案相关性（answer relevance）三个维度评估 RAG 系统（见 D18#002、D18#075、D18#076）。\n2. **合成数据与轻量级裁判微调**：ARES 通过创建自身的合成训练数据（synthetic training data）或基于合成生成的查询和答案，微调轻量级 LM/LLM 裁判（lightweight LM judges），用以评估各个 RAG 组件的质量（D18#002、D18#075）。\n3. **为各组件定制裁判**：ARES 是首个为每个 RAG 流水线组件生成定制 LLM 裁判的自动化评测系统（D18#007），可单独评估 RAG 系统的每个组件以帮助改进（D18#075）。\n4. **少量人工标注与误差缓解**：为减轻潜在预测错误，ARES 利用一小部分人类标注的数据点进行预测驱动推断（PPI），整个流程仅需最少量的真实人工标注（D18#002、D18#075）。\n5. **对比与效果**：在八个知识密集型任务上，ARES 能准确评分和排序 RAG 系统，并超越了已有的 RAGAS 自动化评测框架（D18#075、D18#076、D18#051）。\n\n综上，ARES 利用合成数据微调轻量裁判 + 少量人工标注 PPI 的方式，实现了对 RAG 各组件自动化、低人工成本的评测。",
+        "retrieved": [
+          {
+            "chunk_id": "D18#007",
+            "doc_id": "D18",
+            "section": "p.1",
+            "score": 0.7793
+          },
+          {
+            "chunk_id": "D18#001",
+            "doc_id": "D18",
+            "section": "p.1",
+            "score": 0.7307
+          },
+          {
+            "chunk_id": "D18#000",
+            "doc_id": "D18",
+            "section": "摘要(首页)",
+            "score": 0.7218
+          },
+          {
+            "chunk_id": "D18#051",
+            "doc_id": "D18",
+            "section": "p.6",
+            "score": 0.7203
+          },
+          {
+            "chunk_id": "D18#076",
+            "doc_id": "D18",
+            "section": "p.8",
+            "score": 0.7191
+          },
+          {
+            "chunk_id": "D18#002",
+            "doc_id": "D18",
+            "section": "p.1",
+            "score": 0.7155
+          },
+          {
+            "chunk_id": "D14#009",
+            "doc_id": "D14",
+            "section": "p.1",
+            "score": 0.7145
+          },
+          {
+            "chunk_id": "D18#075",
+            "doc_id": "D18",
+            "section": "p.8",
+            "score": 0.7115
+          }
+        ],
+        "latency_total_s": 15.43
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-06",
+      "type": "reasoning",
+      "subtype": "cross_language",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.11,
+        "latency_generate_s": 31.33,
+        "latency_total_s": 32.45
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "规模正确，标注缺个案级与幻觉强度，价值基本符",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "规模一致，标注缺个案级，价值基本相符",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "近18k规模正确，标注缺个案级，无关键事实错误",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 1,
+      "record": {
+        "answer": "【依据 D17#014】RAGTruth 是一个专为 RAG 场景设计的大规模词级幻觉评估数据集。其规模与标注方式如下：\n\n- **规模**：包含来自主要开源和闭源 LLM 使用 RAG 生成的近 18,000 个完全标注的自然回复（D17#014、D17#002）。进一步统计显示，语料共 2,965 个数据实例，涵盖 989 个问答、1,033 个数据到文本生成、943 个新闻摘要，每个实例含 6 个不同模型的回复（D17#041）。\n- **标注方式**：采用精细的人工标注，在词级别（word-level）进行详细标注（D17#014、D17#070），并包含特殊的跨度级标注（如针对否定幻觉的 span-level 标注 `due_to_null`）（D17#040）。\n\n对幻觉检测的价值：\n1. 作为基准数据集，用于衡量 RAG 下幻觉程度，支持分析不同任务类型、模型、上下文设置下幻觉的关联（D17#002、D17#070、D17#071）。\n2. 利用该数据集可对主流 LLM 产生幻觉的倾向进行广泛基准测试，并评估当前幻觉检测方法（D17#013）。\n3. 支持在段落和词级别全面比较不同幻觉检测方法，并提供微调 LLM 用于幻觉检测的基线方法（D17#014）。\n4. 基于 RAGTruth 微调 Llama 等模型可开发专门的幻觉检测模型，性能优于通用模型的提示方法；结合检测策略可使幻觉率分别降低 42.9% 和 51.0%，展现开发可信 RAG LLM 的潜力（D17#071、D17#070）。",
+        "retrieved": [
+          {
+            "chunk_id": "D17#041",
+            "doc_id": "D17",
+            "section": "p.5",
+            "score": 0.7658
+          },
+          {
+            "chunk_id": "D17#002",
+            "doc_id": "D17",
+            "section": "p.1",
+            "score": 0.7535
+          },
+          {
+            "chunk_id": "D17#014",
+            "doc_id": "D17",
+            "section": "p.2",
+            "score": 0.729
+          },
+          {
+            "chunk_id": "D17#070",
+            "doc_id": "D17",
+            "section": "p.8",
+            "score": 0.7091
+          },
+          {
+            "chunk_id": "D17#013",
+            "doc_id": "D17",
+            "section": "p.2",
+            "score": 0.7018
+          },
+          {
+            "chunk_id": "D17#071",
+            "doc_id": "D17",
+            "section": "p.8",
+            "score": 0.693
+          },
+          {
+            "chunk_id": "D17#040",
+            "doc_id": "D17",
+            "section": "p.5",
+            "score": 0.6824
+          },
+          {
+            "chunk_id": "D17#000",
+            "doc_id": "D17",
+            "section": "摘要(首页)",
+            "score": 0.6814
+          }
+        ],
+        "latency_total_s": 32.45
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": true
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-07",
+      "type": "reasoning",
+      "subtype": "cross_language",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.25,
+        "latency_generate_s": 17.27,
+        "latency_total_s": 18.52
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "能力名称正确，主要发现笼统说四种局限未体现噪声较好",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "负拒绝表述略异，主要发现笼统但无关键事实错误",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "能力名称一致，主要发现表述不精确但无错误",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "覆盖四能力与6LLM，但缺双语及主要发现细节",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "覆盖能力与6LLM，缺双语及主要发现具体表现",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "四种能力已列，但缺中英双语及主要发现中噪声鲁棒性尚可等细节",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 1,
+      "record": {
+        "answer": "【依据 D20#003】RGB基准（Retrieval-Augmented Generation Benchmark）从以下四种基本能力考查LLM的RAG表现：\n- 噪声鲁棒性（noise robustness）\n- 负拒绝（negative rejection）\n- 信息整合（information integration）\n- 反事实鲁棒性（counterfactual robustness）\n\n主要发现：资料中指出，在RGB上评估了6个代表性LLM以诊断当前LLM应用RAG时的挑战（D20#003 p.1）；同时，D20#023（p.2）与D20#090（p.7）明确提到，实验结果表明当前LLMs在这四种能力上存在局限性（limitations），说明要有效将RAG应用于LLMs仍需要大量工作。",
+        "retrieved": [
+          {
+            "chunk_id": "D20#034",
+            "doc_id": "D20",
+            "section": "p.3",
+            "score": 0.7783
+          },
+          {
+            "chunk_id": "D20#003",
+            "doc_id": "D20",
+            "section": "p.1",
+            "score": 0.7777
+          },
+          {
+            "chunk_id": "D20#014",
+            "doc_id": "D20",
+            "section": "p.2",
+            "score": 0.7706
+          },
+          {
+            "chunk_id": "D20#023",
+            "doc_id": "D20",
+            "section": "p.2",
+            "score": 0.7375
+          },
+          {
+            "chunk_id": "D20#001",
+            "doc_id": "D20",
+            "section": "p.1",
+            "score": 0.7277
+          },
+          {
+            "chunk_id": "D20#090",
+            "doc_id": "D20",
+            "section": "p.7",
+            "score": 0.7256
+          },
+          {
+            "chunk_id": "D19#009",
+            "doc_id": "D19",
+            "section": "p.2",
+            "score": 0.7217
+          },
+          {
+            "chunk_id": "D14#000",
+            "doc_id": "D14",
+            "section": "摘要(首页)",
+            "score": 0.7083
+          }
+        ],
+        "latency_total_s": 18.52
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": true
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-08",
+      "type": "reasoning",
+      "subtype": "rule_inference",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.13,
+        "latency_generate_s": 7.83,
+        "latency_total_s": 8.96
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "关键事实与金标一致，无错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "再购1个Hy及同系列不可两档位均与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "还能购1个Hy，同系列不能两档，事实正确",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D13#011】根据规则中的“限购 1+1”：每个主账号最多同时持有 2 个 Token Plan，即 1 个通用 Token Plan + 1 个 Hy Token Plan，且同一系列只能持有 1 个档位。\n\n您已持有 1 个通用 Token Plan，因此还能再购买 **1 个 Hy Token Plan**。关于同一系列能否同时持有两个档位：规则明确说明“同一系列只能持有 1 个档位”，所以无论是通用系列还是 Hy 系列，都**不能**同时持有两个档位。",
+        "retrieved": [
+          {
+            "chunk_id": "D13#011",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·四、开通与使用：从下单到首次调用·4.2 几条必须知道的规则",
+            "score": 0.8742
+          },
+          {
+            "chunk_id": "D13#013",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·六、和通用 Token Plan 怎么搭配",
+            "score": 0.8269
+          },
+          {
+            "chunk_id": "D13#006",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.1 长文档处理与代码库理解",
+            "score": 0.8148
+          },
+          {
+            "chunk_id": "D13#003",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·二、4 档套餐档位与定价全景",
+            "score": 0.8121
+          },
+          {
+            "chunk_id": "D13#014",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·七、写在最后",
+            "score": 0.8074
+          },
+          {
+            "chunk_id": "D13#008",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.3 在 IDE 中重度使用 AI 编程工具",
+            "score": 0.8008
+          },
+          {
+            "chunk_id": "D13#009",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.4 高频 Function Calling 与结构化输出",
+            "score": 0.7818
+          },
+          {
+            "chunk_id": "D13#010",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·四、开通与使用：从下单到首次调用·4.1 三步完成接入",
+            "score": 0.7811
+          }
+        ],
+        "latency_total_s": 8.96
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-09",
+      "type": "reasoning",
+      "subtype": "scenario_decision",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.31,
+        "latency_generate_s": 14.84,
+        "latency_total_s": 16.15
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "Pro档名称额度价格人群均与金标一致无错误",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "推荐档位与价格等关键事实与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "关键事实数字名称结论均与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "遗漏与按量计费单价对比及低50%以上要点。",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "未覆盖按量计费对比与单价要点",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "未提及相比按量计费单价低50%以上，其余要点覆盖",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 1.5,
+      "record": {
+        "answer": "【依据 D13#003】根据 Hy Token Plan 的 4 档套餐档位与定价全景，进阶套餐（Pro）的适配人群明确为“每天高频使用 AI 的开发者”，其月度 Token 限额为 3.2 亿 Tokens，活动单价 238 元/月，覆盖模型为 Hy3 preview。\n\n结合【依据 D13#004】中“Pro 238 元的 3.2 亿 Tokens 配额已经能支持密集的 Agent 编排与长上下文阅读”，以及【依据 D13#008】中说明 Hy Token Plan 可通过配置 Base URL 在 CodeBuddy Code、Cursor 等 IDE 编程工具中重度使用，您作为每天都要在 IDE 里高频使用 AI 编程工具的开发者，最适合选择**进阶套餐（Pro）**，月预算大约为 **238 元**。",
+        "retrieved": [
+          {
+            "chunk_id": "D13#007",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.2 Agent 工作负载与多轮深度推理",
+            "score": 0.8742
+          },
+          {
+            "chunk_id": "D13#003",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·二、4 档套餐档位与定价全景",
+            "score": 0.8581
+          },
+          {
+            "chunk_id": "D13#008",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.3 在 IDE 中重度使用 AI 编程工具",
+            "score": 0.8519
+          },
+          {
+            "chunk_id": "D13#004",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·二、4 档套餐档位与定价全景·2.1 价格梯度怎么看",
+            "score": 0.8495
+          },
+          {
+            "chunk_id": "D13#014",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·七、写在最后",
+            "score": 0.8387
+          },
+          {
+            "chunk_id": "D13#006",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·三、谁该选 Hy Token Plan：4 类典型场景·3.1 长文档处理与代码库理解",
+            "score": 0.8348
+          },
+          {
+            "chunk_id": "D13#011",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·四、开通与使用：从下单到首次调用·4.2 几条必须知道的规则",
+            "score": 0.8305
+          },
+          {
+            "chunk_id": "D13#012",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·五、用前先 0 元试一遍：新人免费体验包",
+            "score": 0.8141
+          }
+        ],
+        "latency_total_s": 16.15
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": true
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-10",
+      "type": "reasoning",
+      "subtype": "calculation",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.1,
+        "latency_generate_s": 16.04,
+        "latency_total_s": 17.14
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "数字与名称正确，计算过程和结果一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "费用数字与计算过程均与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "单价计算总价均与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D11】根据参考资料中混元生文计费概述的 token 后付费价格说明（D11#005），Hunyuan-translation 模型在免费额度用完后按刊例价后付费：输入 1.2元/每百万 tokens，输出 3.6元/每百万 tokens。参考 D11#007 给出的费用计算示例方法（累计调用达到免费额度后剩余 tokens 按输入/输出区分后付费结算），用户调用输入 80 万 tokens、输出 20 万 tokens 的费用计算如下：\n\n- 输入费用 = 800000 tokens / 1000000 tokens × 1.2元/每百万 tokens = 0.8 × 1.2 = 0.96元  \n- 输出费用 = 200000 tokens / 1000000 tokens × 3.6元/每百万 tokens = 0.2 × 3.6 = 0.72元  \n- 总费用 = 0.96元 + 0.72元 = 1.68元\n\n因此，在免费额度已用完且已开通后付费的情况下，处理该批文本需支付 **1.68 元**。（若未主动开通后付费，根据 D11#005 会出现计费异常提示，无法结算。）",
+        "retrieved": [
+          {
+            "chunk_id": "D11#007",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·费用计算示例·后付费",
+            "score": 0.7773
+          },
+          {
+            "chunk_id": "D11#005",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·混元生文价格说明·token 后付费",
+            "score": 0.7664
+          },
+          {
+            "chunk_id": "D12#006",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·预付费资源包",
+            "score": 0.7376
+          },
+          {
+            "chunk_id": "D12#007",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·免费额度",
+            "score": 0.7296
+          },
+          {
+            "chunk_id": "D12#004",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·API 按量定价（元/百万 Tokens）",
+            "score": 0.7292
+          },
+          {
+            "chunk_id": "D11#004",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·免费额度",
+            "score": 0.7164
+          },
+          {
+            "chunk_id": "D12#005",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·API 按量定价（元/百万 Tokens）",
+            "score": 0.7088
+          },
+          {
+            "chunk_id": "D13#005",
+            "doc_id": "D13",
+            "section": "Hy Token Plan 上线：28 元起、覆盖混元 Hy3 preview 的 4 档套餐解析·二、4 档套餐档位与定价全景·2.2 套餐价相比按量计费的差距",
+            "score": 0.6942
+          }
+        ],
+        "latency_total_s": 17.14
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-11",
+      "type": "reasoning",
+      "subtype": "rule_inference",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.12,
+        "latency_generate_s": 13.09,
+        "latency_total_s": 14.21
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "correct",
+              "reason": "结算顺序及不自动转后付费等关键点与金标一致",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "结算顺序与转后付费事实均正确",
+              "score": 2
+            },
+            {
+              "verdict": "correct",
+              "reason": "结算顺序与免费包不自动转后付费事实均与金标一致",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "correct",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D11#006】腾讯混元大模型提供 API 接入方式，按 token 数计费（包括直接调用 API 和在控制台 API Explorer 使用混元生文）。其费用结算顺序为：赠送的**免费资源包** > **付费资源包** > **后付费**。\n\n关于免费资源包用完后会否自动转为后付费：默认情况下，免费资源包和付费资源包耗尽或到期后，**不会自动转入后付费**。如需使用后付费模式结算，请前往腾讯混元大模型控制台 > 设置 > 后付费设置开通后付费（依据 D11#005，若未主动开通后付费，免费资源包耗尽或到期后将出现计费异常提示）。",
+        "retrieved": [
+          {
+            "chunk_id": "D11#002",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·计费方式",
+            "score": 0.8285
+          },
+          {
+            "chunk_id": "D11#006",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·计费与结算方式",
+            "score": 0.819
+          },
+          {
+            "chunk_id": "D11#005",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·混元生文价格说明·token 后付费",
+            "score": 0.8035
+          },
+          {
+            "chunk_id": "D11#003",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·开通方式",
+            "score": 0.7772
+          },
+          {
+            "chunk_id": "D12#007",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·免费额度",
+            "score": 0.7746
+          },
+          {
+            "chunk_id": "D11#000",
+            "doc_id": "D11",
+            "section": "摘要(开头)",
+            "score": 0.7705
+          },
+          {
+            "chunk_id": "D11#007",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·费用计算示例·后付费",
+            "score": 0.7683
+          },
+          {
+            "chunk_id": "D11#004",
+            "doc_id": "D11",
+            "section": "混元生文计费概述·免费额度",
+            "score": 0.7651
+          }
+        ],
+        "latency_total_s": 14.21
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-12",
+      "type": "reasoning",
+      "subtype": "permission_inference",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": false,
+        "retrieval_rank": 4,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.24,
+        "latency_generate_s": 20.0,
+        "latency_total_s": 21.23
+      },
+      "judge": {
+        "factuality": {
+          "metric": "factuality",
+          "runs": [
+            {
+              "verdict": "incorrect",
+              "reason": "身份推荐与金标矛盾，金标应给协作成员待评给普通成员",
+              "score": 0
+            },
+            {
+              "verdict": "partial",
+              "reason": "权限正确，身份主推普通但金标允可，无关键错",
+              "score": 1
+            },
+            {
+              "verdict": "partial",
+              "reason": "权限描述正确，主推身份与金标主推不同但无错",
+              "score": 1
+            }
+          ],
+          "majority_verdict": "partial",
+          "score": 1,
+          "agreement": "2/3",
+          "stable": false,
+          "disagreement": [
+            "incorrect",
+            "partial",
+            "partial"
+          ]
+        }
+      },
+      "judge_avg": 1,
+      "record": {
+        "answer": "【依据 D01#007】\n在 ima 的共享/私域知识库（文档中描述为“私域知识库”，对应团队共享协作场景）中，权限身份分级如下：\n\n- **管理员**：可以管理团队成员、编辑内容；设置内容权限；编辑知识库内容；邀请新成员。\n- **协作成员**：可上传、管理自己的文件；上传文件至知识库；查看知识库内容；基于知识库问答。\n\n如果您只想让同事看资料但不能管理成员，应该给他**普通成员**身份。根据同一文档，普通成员能够：查看知识内容、查看知识库内容、基于知识库问答、评论互动；其权限中不包含管理团队成员（无添加/移除成员、邀请等权限），且不能上传文件，最符合“仅看资料、不管成员”的要求。\n\n（若您允许同事同时上传自己的文件但不管理成员，也可选择“协作成员”，但协作成员具备上传权限，非纯查看。）",
+        "retrieved": [
+          {
+            "chunk_id": "D10#007",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第七步：共享与协作",
+            "score": 0.8094
+          },
+          {
+            "chunk_id": "D02#011",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·5. 共享协作与团队效率",
+            "score": 0.7778
+          },
+          {
+            "chunk_id": "D02#021",
+            "doc_id": "D02",
+            "section": "ima·十一、ima 支持团队协作吗？",
+            "score": 0.7759
+          },
+          {
+            "chunk_id": "D01#007",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·私域知识共享：我们的共享大脑·灵活的知识库权限管理",
+            "score": 0.7722
+          },
+          {
+            "chunk_id": "D01#006",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·私域知识共享：我们的共享大脑",
+            "score": 0.7202
+          },
+          {
+            "chunk_id": "D10#003",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第三步：创建个人知识库",
+            "score": 0.6762
+          },
+          {
+            "chunk_id": "D02#009",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·3. 个性化知识管理与沉淀",
+            "score": 0.6701
+          },
+          {
+            "chunk_id": "D10#002",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第二步：认识界面布局",
+            "score": 0.6672
+          }
+        ],
+        "latency_total_s": 21.23
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": true
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-13",
+      "type": "reasoning",
+      "subtype": "viewpoint_synthesis",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 2,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.28,
+        "latency_generate_s": 25.37,
+        "latency_total_s": 26.65
+      },
+      "judge": {
+        "faithfulness": {
+          "metric": "faithfulness",
+          "runs": [
+            {
+              "verdict": "partial",
+              "reason": "核心优势描述有支撑，但相较通用模型比较无出处",
+              "score": 1
+            },
+            {
+              "verdict": "supported",
+              "reason": "论断皆由D09材料支撑，无编造",
+              "score": 2
+            },
+            {
+              "verdict": "supported",
+              "reason": "回答论断均源自D09上下文，无编造无冲突",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "supported",
+          "score": 2,
+          "agreement": "2/3",
+          "stable": false,
+          "disagreement": [
+            "partial",
+            "supported",
+            "supported"
+          ]
+        },
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "missing",
+              "reason": "遗漏准确性不乱答等核心要点，仅提基于知识库问答",
+              "score": 0
+            },
+            {
+              "verdict": "missing",
+              "reason": "未提准确性真实性核心要点，仅提自有库问答",
+              "score": 0
+            },
+            {
+              "verdict": "missing",
+              "reason": "未提准确性真实性及可信信源等核心要点",
+              "score": 0
+            }
+          ],
+          "majority_verdict": "missing",
+          "score": 0,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 1,
+      "record": {
+        "answer": "【依据 D09】根据《腾讯IMA实战指南》作者（胜不凡）的观点，使用 ima 知识库问答相比直接问 DeepSeek 等通用大模型的核心优势在于：ima 最大的亮点是可以将任何资料上传，然后利用大模型功能进行深度提问（见 D09#002）。具体而言，用户一键上传自己的学习资料、书籍等个人材料后，不仅能获取精华要点，还能让 AI 基于内容出题检验学习成果（如出选择题并附答案解析，见 D09#002、D09#007）；作者分享体验称“只需上传资料，就能让 AI 帮我搞定一切”（见 D09#001）。这种基于用户自有知识库资料进行专属问答、总结与出题辅助的能力，是 ima 知识库问答的差异化核心优势。",
+        "retrieved": [
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.7936
+          },
+          {
+            "chunk_id": "D09#002",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势·揭秘IMA：知识库神器的终极玩法",
+            "score": 0.7929
+          },
+          {
+            "chunk_id": "D09#001",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势",
+            "score": 0.7647
+          },
+          {
+            "chunk_id": "D02#014",
+            "doc_id": "D02",
+            "section": "ima·五、ima 的 AI 搜索功能怎么用？",
+            "score": 0.7603
+          },
+          {
+            "chunk_id": "D09#007",
+            "doc_id": "D09",
+            "section": "腾讯IMA实战指南：一键解锁高效学习新姿势·我的亲身体验：如何用IMA\"吃透\"一本书·第四步：知识检验",
+            "score": 0.7583
+          },
+          {
+            "chunk_id": "D01#004",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·AI笔记，更懂你的创作伙伴",
+            "score": 0.7459
+          },
+          {
+            "chunk_id": "D01#005",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·你可以这样用ima",
+            "score": 0.7426
+          },
+          {
+            "chunk_id": "D03#001",
+            "doc_id": "D03",
+            "section": "ima.copilot",
+            "score": 0.7415
+          }
+        ],
+        "latency_total_s": 26.65
+      },
+      "attribution": {
+        "layer": "generation",
+        "reason": "召回上下文正确但生成错误（编造/误读/要点丢失）",
+        "errors": [
+          "要点遗漏"
+        ],
+        "needs_review": false
+      },
+      "attribution_final": "generation"
+    },
+    {
+      "id": "R-14",
+      "type": "reasoning",
+      "subtype": "comparison",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 1.07,
+        "latency_generate_s": 7.91,
+        "latency_total_s": 8.98
+      },
+      "judge": {
+        "completeness": {
+          "metric": "completeness",
+          "runs": [
+            {
+              "verdict": "complete",
+              "reason": "覆盖全部金标要点及总结，无遗漏",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "覆盖金标所有要点及总结，无遗漏",
+              "score": 2
+            },
+            {
+              "verdict": "complete",
+              "reason": "覆盖金标全部要点，语义一致。",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "complete",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D02】ima 和普通笔记软件的核心区别主要体现在以下几个方面：\n\n1. **AI能力差异**：\n   - 核心定位：普通笔记软件是文本记录工具，ima 是 AI 工作台 + 会思考的知识库。\n   - 搜索方式：普通笔记软件靠关键词匹配，ima 支持 AI 智能问答检索。\n   - 内容理解：普通笔记软件无内容理解能力，ima 可解读文档、总结要点。\n   - 创作辅助：普通笔记软件无或仅基础辅助，ima 提供 AI 辅助写作、生图、转播客等。\n\n2. **知识库整合能力**：\n   - 普通笔记软件中笔记之间相互独立，需要手动建立链接。\n   - ima 将所有资料纳入统一知识库管理，AI 可以跨文档理解和关联，并基于整个知识库回答问题。\n\n3. **Agent能力（copilot）**：\n   - 普通笔记软件是被动记录工具，需要用户主动操作和整理。\n   - ima 的 copilot 能主动理解和处理用户需求，记忆系统持续进化（越用越懂用户），并可执行复杂工作流（通过 Skills 扩展）。\n\n4. **多模态支持**：\n   - 普通笔记软件通常只支持文本和简单附件。\n   - ima 支持对超过 20 种格式的文件（如 PDF、Word、PPT、Excel、图片、音频）进行内容提取与智能分析。\n\n总结而言，ima 不是简单的“升级版笔记软件”，而是一个以知识库为核心的 AI 效率工具，通过 AI 能力让知识“活”起来，真正提升学习和工作效率。",
+        "retrieved": [
+          {
+            "chunk_id": "D02#023",
+            "doc_id": "D02",
+            "section": "ima·十三、ima 与普通笔记软件有什么区别？",
+            "score": 0.8393
+          },
+          {
+            "chunk_id": "D08#000",
+            "doc_id": "D08",
+            "section": "摘要(开头)",
+            "score": 0.696
+          },
+          {
+            "chunk_id": "D10#006",
+            "doc_id": "D10",
+            "section": "用ima打造自己的专属知识库·第六步：个人笔记功能",
+            "score": 0.6781
+          },
+          {
+            "chunk_id": "D02#009",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·3. 个性化知识管理与沉淀",
+            "score": 0.6628
+          },
+          {
+            "chunk_id": "D08#001",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima",
+            "score": 0.6607
+          },
+          {
+            "chunk_id": "D08#002",
+            "doc_id": "D08",
+            "section": "每周测评一个AI应用｜腾讯ima·💡为什么推荐ima？",
+            "score": 0.6516
+          },
+          {
+            "chunk_id": "D01#004",
+            "doc_id": "D01",
+            "section": "ima - 腾讯AI知识管家·个人知识管理·AI笔记，更懂你的创作伙伴",
+            "score": 0.6395
+          },
+          {
+            "chunk_id": "D02#011",
+            "doc_id": "D02",
+            "section": "ima·二、ima 的核心功能有哪些？·5. 共享协作与团队效率",
+            "score": 0.6336
+          }
+        ],
+        "latency_total_s": 8.98
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    },
+    {
+      "id": "R-15",
+      "type": "reasoning",
+      "subtype": "scenario_decision",
+      "rule": {
+        "retrieval_hit": true,
+        "retrieval_hit_top3": true,
+        "retrieval_rank": 1,
+        "refusal_expected": false,
+        "refusal_detected": false,
+        "refusal_accuracy": true,
+        "latency_retrieve_s": 0.98,
+        "latency_generate_s": 12.93,
+        "latency_total_s": 13.9
+      },
+      "judge": {
+        "faithfulness": {
+          "metric": "faithfulness",
+          "runs": [
+            {
+              "verdict": "supported",
+              "reason": "全部论断均有上下文明确支撑，无编造",
+              "score": 2
+            },
+            {
+              "verdict": "supported",
+              "reason": "所有论断均有上下文支撑",
+              "score": 2
+            },
+            {
+              "verdict": "supported",
+              "reason": "所有论断均可在D12#013/014/011中找到对应支撑",
+              "score": 2
+            }
+          ],
+          "majority_verdict": "supported",
+          "score": 2,
+          "agreement": "3/3",
+          "stable": true,
+          "disagreement": []
+        }
+      },
+      "judge_avg": 2,
+      "record": {
+        "answer": "【依据 D12#013】根据《2026 国内七大 AI 大模型定价全对比》十二、行业趋势与选型策略中的选型策略表格，针对“零成本试水”场景，推荐方案为**智谱 GLM-4-Flash / 腾讯 Hunyuan-lite**，理由是“完全免费，无门槛”。\n\n同文其他章节也印证了该建议：D12#014 总结指出智谱 GLM-4-Flash 和腾讯 Hunyuan-lite 零成本可用，是开发者的“起跑线”；D12#011 轻量/免费模型横评进一步明确两者为完全免费模型，且最佳免费起步路径为智谱 GLM-4-Flash（128K 上下文、支持微调、免费）> 腾讯 Hunyuan-lite。",
+        "retrieved": [
+          {
+            "chunk_id": "D12#013",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·十二、行业趋势与选型策略·选型策略",
+            "score": 0.8537
+          },
+          {
+            "chunk_id": "D12#001",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比",
+            "score": 0.8352
+          },
+          {
+            "chunk_id": "D12#014",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·十三、总结",
+            "score": 0.8217
+          },
+          {
+            "chunk_id": "D12#012",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·十二、行业趋势与选型策略·价格趋势",
+            "score": 0.8017
+          },
+          {
+            "chunk_id": "D12#002",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·六、腾讯（混元 Hunyuan）·厂商背景",
+            "score": 0.7667
+          },
+          {
+            "chunk_id": "D12#009",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·八、旗舰模型定价横评（元/百万 Tokens）",
+            "score": 0.747
+          },
+          {
+            "chunk_id": "D12#000",
+            "doc_id": "D12",
+            "section": "摘要(开头)",
+            "score": 0.7446
+          },
+          {
+            "chunk_id": "D12#011",
+            "doc_id": "D12",
+            "section": "2026 国内七大 AI 大模型定价全对比·九、轻量/免费模型定价横评",
+            "score": 0.7432
+          }
+        ],
+        "latency_total_s": 13.9
+      },
+      "attribution": {
+        "layer": "correct",
+        "reason": "",
+        "errors": [],
+        "needs_review": false
+      },
+      "attribution_final": "correct"
+    }
+  ]
+}

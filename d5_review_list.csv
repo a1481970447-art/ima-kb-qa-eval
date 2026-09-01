@@ -1,0 +1,65 @@
+﻿id,type,subtype,question,gold_answer,answer,attribution_layer,attribution_reason,review_reason,manual_verdict
+F-05,fact,outdated_info,ima 目前支持哪些使用平台和客户端？,ima 支持网页版、Windows、Mac、iOS、Android、鸿蒙手机、鸿蒙电脑、微信小程序、浏览器插件等多种平台。,"【依据 D03】根据参考资料中《ima.copilot·基本信息》（D03#002）的记载，ima.copilot（即ima）的软件平台包括：电脑端（Windows、Mac）、移动端（安卓、iOS）、微信小程序。
+
+结合其他资料进一步补充：
+- D10#001、D03#003 印证了 Windows 客户端、Mac 客户端以及微信小程序的存在，且各端上线历程清晰（Mac端2024年10月、Windows端2024年11月、安卓版2025年2月、iOS版2025年3月、小程序2024年12月等）；
+- D08#002 指出 ima 支持“手机/电脑/iPad随时记录，app/小程序/网页无缝衔接”，明确了除客户端和小程序外，还提供网页端，且 iPad 可通过 iOS 端或网页使用。
+
+综合可知，ima 目前支持的使用平台和客户端有：**Windows 客户端、Mac 客户端、安卓 App、i",correct,,"partial弱问题['factuality', 'completeness']",
+F-12,fact,positive_control,Hy Token Plan 目前提供哪几个套餐档位？价格分别是多少？,Hy Token Plan 提供 4 个档位：体验套餐（Lite）3500 万 Tokens/28 元月；基础套餐（Standard）1 亿 Tokens/78 元月；进阶套餐（Pro）3.2 亿 Tokens/238 元月；专业套餐（Max）6.5 亿 Tokens/468 元月。均覆盖 Hy3 preview 模型。,"【依据 D13#003】Hy Token Plan 目前提供 4 个套餐档位，对应的价格分别为：
+- 体验套餐（Lite）：28 元/月
+- 基础套餐（Standard）：78 元/月
+- 进阶套餐（Pro）：238 元/月
+- 专业套餐（Max）：468 元/月
+
+（以上档位均覆盖混元 Hy3 preview 模型，详见资料中 4 档套餐档位与定价全景表格。）",correct,,partial弱问题['completeness'],
+F-15,fact,deep_detail,首次开通腾讯混元大模型服务可以获得多少免费额度？有效期多久？,混元生文将发放一次性免费资源包：共 100 万 tokens（Hunyuan-a13b、Hunyuan-role-latest 等多个模型共享消耗），资源包有效期为 1 年，自开通服务之日起算，未使用完过期作废。计费结算时免费资源包优先扣减。,"【依据 D11#004】首次开通腾讯混元大模型服务后，混元生文将发放一定量级的免费调用额度，以一次性的免费资源包形式发放，并在计费结算时优先扣减。具体免费额度与有效期如下：
+
+- **Hunyuan-a13b、Hunyuan-role-latest、Hunyuan-translation、Hunyuan-translation-lite、Tencent HY Vision 1.5 Instruct、Hunyuan-turbos-vision、Hunyuan-t1-vision、Hunyuan-turbos-vision-video**：共 100 万 tokens，共享消耗；资源包有效期为 1 年，自开通服务之日起 1 年内若未使用完则过期作废。
+- **Hunyuan-embedding**：100 万 tokens，资源包有效期为 1 年。
+
+此外，参考资料 D12#007 中提到：首",correct,,裁判分歧[factuality:partial/correct/correct],
+M-02,multi_doc,price_reconciliation,混元 API 的价格，腾讯云官方计费文档和第三方对比文章的口径一致吗？哪篇提到了 2026 年的调价？,口径不完全一致：官方计费文档（D11，更新于 2026-06-26）给出刊例价，如 Hunyuan-a13b 输入 0.5 元/输出 2 元、Hunyuan-role-latest 输入 2.4 元/输出 9.6 元；第三方对比文（D12，数据截至 2026-04）覆盖更多新模型（HY 2.0 Think/Instruct 等官方文档未列），其 a13b 等共有模型价格与官方一致。提到调价的是第三方对比文 D12：2026 年 3-4 月腾讯云经历两轮调价，模型 API 价格大幅上调（如 HY 2.0 Instruct 输入价涨幅 463%），AI 算力刊例价上调 5%，并结束了 GLM 5、MiniMax 2.5、Kimi 2.5 等第三方模型限时免费公测。,"【依据 D11、D12】
+
+腾讯云官方计费文档（D11系列）与第三方对比文章（D12系列）关于混元 API 价格的口径**不完全一致**：
+
+1. **官方计费文档（D11）**：提供了混元生文 API 的计费方式（后付费/预付费，D11#002）、免费资源包与后付费结算顺序（D11#006）、具体刊例价表格（如 Hunyuan-role-latest 输入 2.4元/百万 tokens 等，D11#005）以及免费额度示例（暗示首次开通获 100 万 tokens 免费包，D11#007），但**全文未提及任何 2026 年调价信息**。
+2. **第三方对比文章（D12）**：明确提及 2026 年 3-4 月腾讯云经历两轮调价，模型 API 价格大幅上调（如 HY 2.0 Instruct 输入价涨幅 463%），AI 算力刊例价上调 5%（D12#002、D12#000）；并提示 ",correct,,partial弱问题['completeness'],
+R-01,reasoning,cross_language,RAGAS 框架提出了哪些无需参考答案（reference-free）的评测指标？,RAGAS 的核心指标包括：Faithfulness（忠实度，答案是否基于给定上下文）、Answer Relevance（答案相关性，答案是否切题、是否完整无冗余）、Context Precision / Context Recall（上下文精确率/召回率，检索质量）等。这些指标无需依赖人工标注的 ground truth 参考答案，可加速 RAG 架构的评测循环。,"【依据 D14#044】根据参考资料，Ragas（即 RAGAS）是一个用于检索增强生成（RAG）管道的无参考（reference-free）评估框架（另见 D14#001）。该框架实现了三个质量方面的评测指标（D14#044、D14#045、D18#076）：
+1. **答案相关性（answer relevance）**：即答案是否解决了所提出的问题（D14#044）；
+2. **上下文相关性（context relevance）**：即检索到的上下文是否足够聚焦（D14#044）；
+3. **答案忠实性（answer faithfulness）**：D14#045 与 D18#076 显示 Ragas 包含此指标，且 D18#076 明确指出 ARES 在 context relevance、answer faithfulness 和 answer relevance 上超越了已有的 ",generation,召回上下文正确但生成错误（编造/误读/要点丢失）,partial弱问题['completeness'],
+R-02,reasoning,positive_control,LLM-as-judge（大模型裁判）存在哪些偏差和局限？,主要包括三类偏差和一个局限：①位置偏差（position bias）；②冗长偏差（verbosity bias，偏爱更长的回答）；③自我增强偏差（self-enhancement bias，偏爱自己生成的回答）；以及有限的推理能力（limited reasoning ability）。论文同时发现强模型裁判（如 GPT-4）与人类偏好的一致性可超过 80%，达到人类之间一致性的同等水平。,"【依据 D02】根据参考资料 D15#002（p.1）的明确表述，LLM-as-a-judge（大模型裁判）存在的偏差和局限主要包括：
+- 位置偏差（position bias）
+- 冗长偏差（verbosity bias）
+- 自我增强偏差（self-enhancement bias）
+- 有限的推理能力（limited reasoning ability）
+
+此外，资料 D15#034（p.4）提及了位置偏差等局限；D15#018（p.2）同样列举了上述四项偏差与局限（位置偏差、冗长偏差、自我增强偏差、有限推理能力）；D15#051（p.6）指出 LLM 裁判在问题求解过程中可能仍会被上下文误导（misled by the context），这也属于一种局限。资料 D15#036（p.5）通过表格进一步展示了不同 LLM 裁判的位置偏差表现。",correct,,裁判分歧[factuality:correct/partial/partial;completeness:complete/complete/partial]；partial弱问题['factuality'],
+R-06,reasoning,cross_language,RAGTruth 语料库的规模和标注方式是怎样的？它对幻觉检测有什么价值？,"RAGTruth 包含近 18,000 条由不同 LLM 在标准 RAG 框架下自然生成的响应，覆盖多种领域与任务；在个案级和词级均做了细致人工标注，并包含幻觉强度评估。价值：基于该高质量数据集微调一个相对较小的 LLM，即可获得与 GPT-4 等最先进模型的 prompt 方法有竞争力的幻觉检测性能，且微调后的模型还能有效缓解 LLM 响应中的幻觉。","【依据 D17#014】RAGTruth 是一个专为 RAG 场景设计的大规模词级幻觉评估数据集。其规模与标注方式如下：
+
+- **规模**：包含来自主要开源和闭源 LLM 使用 RAG 生成的近 18,000 个完全标注的自然回复（D17#014、D17#002）。进一步统计显示，语料共 2,965 个数据实例，涵盖 989 个问答、1,033 个数据到文本生成、943 个新闻摘要，每个实例含 6 个不同模型的回复（D17#041）。
+- **标注方式**：采用精细的人工标注，在词级别（word-level）进行详细标注（D17#014、D17#070），并包含特殊的跨度级标注（如针对否定幻觉的 span-level 标注 `due_to_null`）（D17#040）。
+
+对幻觉检测的价值：
+1. 作为基准数据集，用于衡量 RAG 下幻觉程度，支持分析不同任务类型、模型、上下文设置下幻",correct,,partial弱问题['factuality'],
+R-07,reasoning,cross_language,RGB 基准（Retrieval-Augmented Generation Benchmark）从哪四种基本能力考查 LLM 的 RAG 表现？主要发现是什么？,四种基本能力：①噪声鲁棒性（noise robustness）；②负面拒答（negative rejection，检索内容不含答案时应拒答）；③信息整合（information integration，整合多篇检索内容）；④反事实鲁棒性（counterfactual robustness，应对检索中的错误信息）。基准为中英双语，评测了 6 个代表性 LLM。主要发现：LLM 具备一定噪声鲁棒性，但在负面拒答、信息整合和处理错误信息方面仍明显吃力。,"【依据 D20#003】RGB基准（Retrieval-Augmented Generation Benchmark）从以下四种基本能力考查LLM的RAG表现：
+- 噪声鲁棒性（noise robustness）
+- 负拒绝（negative rejection）
+- 信息整合（information integration）
+- 反事实鲁棒性（counterfactual robustness）
+
+主要发现：资料中指出，在RGB上评估了6个代表性LLM以诊断当前LLM应用RAG时的挑战（D20#003 p.1）；同时，D20#023（p.2）与D20#090（p.7）明确提到，实验结果表明当前LLMs在这四种能力上存在局限性（limitations），说明要有效将RAG应用于LLMs仍需要大量工作。",correct,,"partial弱问题['factuality', 'completeness']",
+R-09,reasoning,scenario_decision,我是一名每天都要在 IDE 里高频使用 AI 编程工具的开发者，想在 Hy Token Plan 四档中选一档，哪档最适合？月预算大约多少？,进阶套餐（Pro）：3.2 亿 Tokens/月，238 元/月，官方适配人群即『每天高频使用 AI 的开发者』。其配额可支持密集的 Agent 编排与长上下文阅读；相比按量计费（Hy3 preview 输入分段 1.2 元/百万 Tokens 起、输出分段 4 元/百万 Tokens 起），Pro 档折合百万 Tokens 单价约 0.74 元，低 50% 以上。,"【依据 D13#003】根据 Hy Token Plan 的 4 档套餐档位与定价全景，进阶套餐（Pro）的适配人群明确为“每天高频使用 AI 的开发者”，其月度 Token 限额为 3.2 亿 Tokens，活动单价 238 元/月，覆盖模型为 Hy3 preview。
+
+结合【依据 D13#004】中“Pro 238 元的 3.2 亿 Tokens 配额已经能支持密集的 Agent 编排与长上下文阅读”，以及【依据 D13#008】中说明 Hy Token Plan 可通过配置 Base URL 在 CodeBuddy Code、Cursor 等 IDE 编程工具中重度使用，您作为每天都要在 IDE 里高频使用 AI 编程工具的开发者，最适合选择**进阶套餐（Pro）**，月预算大约为 **238 元**。",correct,,partial弱问题['completeness'],
+R-12,reasoning,permission_inference,在 ima 共享知识库中，管理员和协作成员分别能做什么？如果我只想让同事看资料但不能管理成员，应该给他哪种身份？,管理员：可以管理团队成员、编辑内容、设置内容权限、邀请新成员。协作成员：可上传并管理自己的文件、查看知识库内容、基于知识库问答（不能管理成员或设置权限）。只想让同事查看资料且不参与管理，应给『协作成员』（若仅需查看和问答，也可给权限更低的『普通成员』：仅查看内容、基于知识库问答、评论互动）。,"【依据 D01#007】
+在 ima 的共享/私域知识库（文档中描述为“私域知识库”，对应团队共享协作场景）中，权限身份分级如下：
+
+- **管理员**：可以管理团队成员、编辑内容；设置内容权限；编辑知识库内容；邀请新成员。
+- **协作成员**：可上传、管理自己的文件；上传文件至知识库；查看知识库内容；基于知识库问答。
+
+如果您只想让同事看资料但不能管理成员，应该给他**普通成员**身份。根据同一文档，普通成员能够：查看知识内容、查看知识库内容、基于知识库问答、评论互动；其权限中不包含管理团队成员（无添加/移除成员、邀请等权限），且不能上传文件，最符合“仅看资料、不管成员”的要求。
+
+（若您允许同事同时上传自己的文件但不管理成员，也可选择“协作成员”，但协作成员具备上传权限，非纯查看。）",correct,,裁判分歧[factuality:incorrect/partial/partial]；partial弱问题['factuality'],
+R-13,reasoning,viewpoint_synthesis,按《腾讯IMA实战指南》作者的观点，使用 ima 知识库问答相比直接问 DeepSeek 等通用大模型，核心优势是什么？,核心优势是答案的准确性与真实性：ima 只基于用户自己的知识库回答问题，知识库里没有的内容它就回答不了、也不会乱答。对于非常专业、比较私密的知识，用户可以拥有专属知识库并调用 AI 基于它作答，保证输出结果基于可信信源——这在 AI 时代非常重要。,【依据 D09】根据《腾讯IMA实战指南》作者（胜不凡）的观点，使用 ima 知识库问答相比直接问 DeepSeek 等通用大模型的核心优势在于：ima 最大的亮点是可以将任何资料上传，然后利用大模型功能进行深度提问（见 D09#002）。具体而言，用户一键上传自己的学习资料、书籍等个人材料后，不仅能获取精华要点，还能让 AI 基于内容出题检验学习成果（如出选择题并附答案解析，见 D09#002、D09#007）；作者分享体验称“只需上传资料，就能让 AI 帮我搞定一切”（见 D09#001）。这种基于用户自有知识库资料进行专属问答、总结与出题辅助的能力，是 ima 知识库问答的差异化核心优势。,generation,召回上下文正确但生成错误（编造/误读/要点丢失）,裁判分歧[faithfulness:partial/supported/supported],

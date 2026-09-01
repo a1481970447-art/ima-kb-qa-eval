@@ -1,0 +1,51 @@
+﻿id,type,subtype,difficulty,origin,question,gold_doc_id,retrieval_hit_top3,retrieval_rank,refusal_accuracy,faithfulness,factuality,completeness,judge_avg,latency_total_s,wrong,attribution_layer,attribution_layer_final,attribution_reason,attribution_note,errors,judge_disagreements,needs_review
+F-01,fact,data_conflict,easy,badcase:A-01,ima 是什么时候上线的？,D02|D03,True,2,True,-,correct,-,2,19.49,False,correct,correct,,,,0,False
+F-02,fact,deep_detail,medium,badcase:A-03,ima 新用户的基础存储空间是多少？有哪些扩容方式？上限是多少？,D02,True,1,True,-,correct,complete,2,9.06,False,correct,correct,,,,0,False
+F-03,fact,deep_detail,easy,badcase:A-04,copilot 新人福利发放多少算力？有效期是多久？,D02,True,1,True,-,correct,-,2,8.03,False,correct,correct,,,,0,False
+F-04,fact,deep_detail,easy,badcase:A-07,邀请新用户注册 ima，最多可以获得多少存储空间奖励？,D02,True,1,True,-,correct,-,2,7.5,False,correct,correct,,,,0,False
+F-05,fact,outdated_info,easy,badcase:A-05,ima 目前支持哪些使用平台和客户端？,D02,True,3,True,-,partial,partial,1,20.35,False,correct,correct,,,,0,True
+F-06,fact,deep_detail,easy,badcase:A-08,ima 知识库广场覆盖了多少行业？累积沉淀了多少份知识库文件？,D01,True,1,True,-,correct,-,2,9.47,False,correct,correct,,,,0,False
+F-07,fact,outdated_info,medium,badcase:A-09,ima 现在支持切换使用哪些大模型？分别适合什么场景？,D02,True,2,False,-,incorrect,-,0,29.54,True,generation,retrieval,金标已入 top-3 仍错误拒答,改判（generation→retrieval）：自动树按『错误拒答+金标 hit_top3』判生成层，但复核发现 rank=2 是文档级弱证据——D02 命中的是『核心功能』章节 chunk，金标『模型切换菜单+各模型适用场景』章节实际未召回。模型『无据可答而拒答』是诚实行为，根因是章节级检索失败。教训：文档级命中率会高估检索质量，D6 看板应补章节级口径。,错误拒答|事实错误,0,False
+F-08,fact,deep_detail,medium,badcase:A-12,ima 的知识 Agent「copilot」功能是什么时候推出的？什么时候全面开放？,D02|D03,True,1,True,-,correct,-,2,7.17,False,correct,correct,,,,0,False
+F-09,fact,positive_control,easy,control:C-1,每日登录 ima 可以领取多少算力？有效期是多久？,D02,True,1,True,-,correct,-,2,10.62,False,correct,correct,,,,0,False
+F-10,fact,cross_domain_confusion,medium,badcase:A-10,腾讯混元 Hunyuan-a13b 模型的输入和输出价格分别是多少？,D11,False,6,True,-,correct,-,2,11.45,False,correct,correct,,,,0,False
+F-11,fact,deep_detail,medium,badcase:A-11,Hy3 preview 模型的参数规模和上下文窗口是多少？,D13,True,1,True,-,correct,-,2,10.7,False,correct,correct,,,,0,False
+F-12,fact,positive_control,medium,control:C-3,Hy Token Plan 目前提供哪几个套餐档位？价格分别是多少？,D13,True,1,True,-,correct,partial,1.5,7.95,False,correct,correct,,,,0,True
+F-13,fact,calc_example,hard,control:C-4,用户当月首次使用，累计调用 Hunyuan-role-latest 模型共 200 万 tokens（其中 80 万输入、20 万输出），需要支付多少费用？,D11,True,3,True,-,correct,-,2,17.69,False,correct,correct,,,,0,False
+F-14,fact,same_topic_multi_source,easy,control:C-2,ima.copilot 2.1.1 版本更新了哪些功能？,D06|D07,True,1,True,-,correct,complete,2,9.84,False,correct,correct,,,,0,False
+F-15,fact,deep_detail,easy,new,首次开通腾讯混元大模型服务可以获得多少免费额度？有效期多久？,D11|D12,True,1,True,-,correct,-,2,16.1,False,correct,correct,,,,1,False
+F-16,fact,deep_detail,easy,new,ima 支持哪些账号注册和登录方式？,D02,False,4,False,-,incorrect,-,0,18.21,True,retrieval,retrieval,金标未召回，模型无据可答而拒答,维持：长文档细节埋深（rank=4 弱命中），『仅支持微信扫码』金标 chunk 未召回导致错误拒答，诚实行为,错误拒答|事实错误,0,False
+F-17,fact,timeline_detail,medium,new,ima 的知识库广场是什么时候上线的？,D03,False,,False,-,incorrect,-,0,15.7,True,retrieval,retrieval,金标未召回，模型无据可答而拒答,维持：D03 时间线 chunk 未召回（rank=None），模型无据可答而拒答,错误拒答|事实错误,0,False
+F-18,fact,historical_version,easy,new,ima 1.9.3 版本的两大核心更新是什么？,D05,True,1,True,-,correct,-,2,6.73,False,correct,correct,,,,0,False
+F-19,fact,feature_detail,medium,new,ima 2.0 新增的任务模式是怎么工作的？怎么开通？,D04,True,1,True,-,correct,complete,2,13.09,False,correct,correct,,,,0,False
+F-20,fact,deep_detail,hard,new,ima 知识库支持导入哪些常见音频格式？,D02,True,1,True,-,correct,-,2,7.92,False,correct,correct,,,,0,False
+J-01,refusal,internal_params,hard,badcase:A-15,ima 内部检索用的具体切块参数（chunk size）是多少？,,,,True,-,-,-,-,18.99,False,correct,correct,,,,0,False
+J-02,refusal,competitor_data,medium,badcase:A-16,腾讯元宝的日活跃用户数（DAU）是多少？,,,,True,-,-,-,-,8.79,False,correct,correct,,,,0,False
+J-03,refusal,undisclosed_ops,medium,badcase:A-17,ima 的月活跃用户数（MAU）是多少？,,,,True,-,-,-,-,13.33,False,correct,correct,,,,0,False
+J-04,refusal,undisclosed_ops,easy,new,ima 产品团队的员工规模和内部组织架构是怎样的？,,,,True,-,-,-,-,9.58,False,correct,correct,,,,0,False
+J-05,refusal,undisclosed_ops,medium,new,混元大模型的训练数据量有多大？用了多少张显卡训练？,,,,True,-,-,-,-,10.13,False,correct,correct,,,,0,False
+J-06,refusal,detail_absent,medium,new,ima Windows 客户端的安装包有多大（多少 MB）？,,,,True,-,-,-,-,12.22,False,correct,correct,,,,0,False
+J-07,refusal,detail_absent,hard,new,在 ima 知识号发布 Skill 后，平台审核一般需要几个工作日？,,,,True,-,-,-,-,15.88,False,correct,correct,,,,0,False
+J-08,refusal,detail_absent,hard,new,混元 Hy3 正式版（非 preview）是什么时候发布的？,,,,True,-,-,-,-,16.21,False,correct,correct,,,,0,False
+J-09,refusal,meta_data_absent,easy,new,RAGAS 框架的 GitHub 仓库有多少 star？被引用了多少次？,,,,True,-,-,-,-,9.51,False,correct,correct,,,,0,False
+J-10,refusal,competitor_data,medium,new,ima 在各大应用商店的评分是多少？用户差评率有多高？,,,,True,-,-,-,-,13.53,False,correct,correct,,,,0,False
+M-01,multi_doc,cross_doc_conflict,hard,badcase:A-13,两个百科词条（腾讯云百科与搜狗百科）对 ima 上线时间的记载有什么差异？,D02|D03,True,1,False,-,incorrect,missing,0,17.68,True,generation,generation,金标已入 top-3 仍错误拒答,维持（附 PM 洞察）：D02 与 D03 时间线信息均在上下文中（答案自己引用了 D03#003 分端时间），模型却以『均未提及腾讯云百科或搜狗百科词条』拒答——未建立『文档↔百科词条』映射。深层原因：D3 的 front-matter 物理隔离把词条出处（信源身份）一并剥离，元数据防污染与信源身份可追溯是一对真实的产品矛盾，值得写进提案,错误拒答|事实错误|要点遗漏,0,False
+M-02,multi_doc,price_reconciliation,hard,badcase:A-14,混元 API 的价格，腾讯云官方计费文档和第三方对比文章的口径一致吗？哪篇提到了 2026 年的调价？,D11|D12,True,1,True,-,correct,partial,1.5,26.38,False,correct,correct,,,,0,True
+M-03,multi_doc,same_version_two_reports,hard,badcase:A-22,关于 ima 2.1.1 版本，两篇实测文章（AI局中友 与 黄记聊AI）的报道有什么相同和不同？,D06|D07,False,6,False,-,-,missing,0,16.71,True,retrieval,retrieval,金标未召回，模型无据可答而拒答,维持：两篇时间线 chunk 均未进高位（rank=6 弱命中），部分召回失败,错误拒答|要点遗漏,0,False
+M-04,multi_doc,outdated_vs_authoritative,hard,badcase:A-05,有文档说 ima 只提供三种使用方式，也有文档列了很多平台，应该以哪个为准？现在的完整清单是什么？,D02|D10,True,1,True,-,incorrect,-,0,17.41,True,retrieval,data,多文档题金标未全部进 top-3（缺 ['D02']）,改判（retrieval→data，复合错误）：D10 过期表述『三种使用方式』TOP1 高位命中且被模型采信为权威答案（数据层埋点在复现架构中真实触发）；D02 权威平台清单 chunk 未召回是次因（剥夺纠错机会）；金标要求『按信源权威度取舍』而模型无此指令是第三因。主因判数据层：库中存在过期脏数据且排序权重高于权威源,事实错误,0,False
+M-05,multi_doc,cross_doc_verification,medium,new,Hunyuan-a13b 的价格在官方计费文档和第三方对比文中分别是怎么记载的？两处口径一致吗？,D11|D12,True,1,True,-,correct,-,2,12.09,False,correct,correct,,,,0,False
+R-01,reasoning,cross_language,hard,badcase:A-18,RAGAS 框架提出了哪些无需参考答案（reference-free）的评测指标？,D14,True,3,True,-,incorrect,partial,0.5,25.67,True,generation,generation,召回上下文正确但生成错误（编造/误读/要点丢失）,维持：D14 正确章节召回（rank=3），跨语言 chunk 检索实际成功（与 D1 在 ima 实测的『仅高亮标题』不同——复现架构 embedding 跨语言能力更强，此差异需在报告声明）；答案对 reference-free 指标列举不完整（漏 Faithfulness 核心指标）属生成层归纳不足,事实错误,0,True
+R-02,reasoning,positive_control,medium,control:C-5,LLM-as-judge（大模型裁判）存在哪些偏差和局限？,D15,True,1,True,-,partial,complete,1.5,20.0,False,correct,correct,,,,2,True
+R-03,reasoning,content_retrieval,medium,badcase:A-19,胜不凡介绍的用 IMA『吃透』一本书的五步方法是什么？,D09,True,1,True,-,-,complete,2,14.85,False,correct,correct,,,,0,False
+R-04,reasoning,cross_language,hard,new,工程视角下 RAG 系统有哪七个失败点（failure points）？,D16,True,1,False,-,-,missing,0,14.54,True,generation,generation,金标已入 top-3 仍错误拒答,维持：D16 相关 chunk 已在上下文，模型仅提取 FP1 后以『其余六个未在片段中给出』拒答——LLM 未正确提取上下文信息，正是 Seven Failure Points 论文定义的 FP4 Not Extracted 的原样复现（用被测论文自己的失败点框架诊断出同款失败点，报告彩蛋）,错误拒答|要点遗漏,0,False
+R-05,reasoning,cross_language,hard,new,ARES 框架如何实现对 RAG 系统的自动化评测？,D18,True,1,True,-,correct,complete,2,15.43,False,correct,correct,,,,0,False
+R-06,reasoning,cross_language,hard,new,RAGTruth 语料库的规模和标注方式是怎样的？它对幻觉检测有什么价值？,D17,True,1,True,-,partial,-,1,32.45,False,correct,correct,,,,0,True
+R-07,reasoning,cross_language,hard,new,RGB 基准（Retrieval-Augmented Generation Benchmark）从哪四种基本能力考查 LLM 的 RAG 表现？主要发现是什么？,D20,True,1,True,-,partial,partial,1,18.52,False,correct,correct,,,,0,True
+R-08,reasoning,rule_inference,medium,new,我已经持有 1 个通用 Token Plan，还能再购买几个 Hy Token Plan？同一系列能同时持有两个档位吗？,D13,True,1,True,-,correct,-,2,8.96,False,correct,correct,,,,0,False
+R-09,reasoning,scenario_decision,medium,new,我是一名每天都要在 IDE 里高频使用 AI 编程工具的开发者，想在 Hy Token Plan 四档中选一档，哪档最适合？月预算大约多少？,D13,True,1,True,-,correct,partial,1.5,16.15,False,correct,correct,,,,0,True
+R-10,reasoning,calculation,hard,new,免费额度已用完的情况下，调用 Hunyuan-translation 模型处理一批文本：输入 80 万 tokens、输出 20 万 tokens，需要支付多少费用？请给出计算过程。,D11,True,1,True,-,correct,-,2,17.14,False,correct,correct,,,,0,False
+R-11,reasoning,rule_inference,medium,new,腾讯混元大模型 API 的费用结算顺序是怎样的？免费资源包用完后会自动转为后付费吗？,D11,True,1,True,-,correct,-,2,14.21,False,correct,correct,,,,0,False
+R-12,reasoning,permission_inference,medium,new,在 ima 共享知识库中，管理员和协作成员分别能做什么？如果我只想让同事看资料但不能管理成员，应该给他哪种身份？,D01,False,4,True,-,partial,-,1,21.23,False,correct,correct,,,,1,True
+R-13,reasoning,viewpoint_synthesis,medium,new,按《腾讯IMA实战指南》作者的观点，使用 ima 知识库问答相比直接问 DeepSeek 等通用大模型，核心优势是什么？,D09,True,2,True,supported,-,missing,1,26.65,True,generation,generation,召回上下文正确但生成错误（编造/误读/要点丢失）,维持：D09 观点 chunk 召回且答案有据（faithfulness=supported），但观点归纳偏离金标核心（『答案准确性与真实性』→『资料上传与深度提问』），生成层综合失败,要点遗漏,1,False
+R-14,reasoning,comparison,medium,new,ima 和普通笔记软件的核心区别有哪些？,D02,True,1,True,-,-,complete,2,8.98,False,correct,correct,,,,0,False
+R-15,reasoning,scenario_decision,easy,new,按《2026 国内七大 AI 大模型定价全对比》一文的建议，开发者想零成本试水大模型 API，应该选什么方案？,D12,True,1,True,supported,-,-,2,13.9,False,correct,correct,,,,0,False

@@ -1,0 +1,16 @@
+# 密钥——绝不提交（push 前全文检索一遍）
+hy api key.txt
+*.key
+*.txt.bak
+
+# Python 运行时产物
+__pycache__/
+*.pyc
+.venv/
+
+# 运行日志与断点（跑批时自动生成）
+*.log
+d5_checkpoint.json
+
+# 截图与录屏草稿（成片 demo.mp4 手动放入根目录）
+d6_*.png
